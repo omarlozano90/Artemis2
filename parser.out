@@ -1,0 +1,2980 @@
+Created by PLY version 3.7 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> main
+Rule 1     main -> PROGRAM ID SEMICOL decglobal decfunc MAIN block EXIT
+Rule 2     main -> PROGRAM ID SEMICOL decfunc MAIN block EXIT
+Rule 3     main -> PROGRAM ID SEMICOL decglobal MAIN block EXIT
+Rule 4     main -> PROGRAM ID SEMICOL MAIN block EXIT
+Rule 5     decglobal -> decarr decglobal
+Rule 6     decglobal -> decvar decglobal
+Rule 7     decglobal -> decarr
+Rule 8     decglobal -> decvar
+Rule 9     decfunc -> assvar decfunc
+Rule 10    decfunc -> assarr decfunc
+Rule 11    decfunc -> function decfunc
+Rule 12    decfunc -> assvar
+Rule 13    decfunc -> assarr
+Rule 14    decfunc -> function
+Rule 15    function -> FUNCTION ID type OPAR type ID CPAR block
+Rule 16    function -> FUNCTION ID type OPAR type ID COMA functionhelp
+Rule 17    functionhelp -> type ID COMA functionhelp
+Rule 18    functionhelp -> type ID CPAR block
+Rule 19    return -> RETURN association SEMICOL
+Rule 20    block -> OBRAK estatuto CBRAK
+Rule 21    block -> OBRAK estatuto block
+Rule 22    block -> estatuto block
+Rule 23    block -> estatuto CBRAK
+Rule 24    estatuto -> assvar
+Rule 25    estatuto -> assarr
+Rule 26    estatuto -> decvar
+Rule 27    estatuto -> decarr
+Rule 28    estatuto -> condition
+Rule 29    estatuto -> writing
+Rule 30    estatuto -> cycle
+Rule 31    estatuto -> return
+Rule 32    assvar -> ID EQUAL asshelp
+Rule 33    assarr -> ID OBRAC arrdim EQUAL asshelp
+Rule 34    asshelp -> association SEMICOL
+Rule 35    asshelp -> CCHAR SEMICOL
+Rule 36    asshelp -> CSTRING SEMICOL
+Rule 37    condition -> IF OPAR association CPAR block else
+Rule 38    else -> ELSE block
+Rule 39    else -> <empty>
+Rule 40    decvar -> VAR type ID SEMICOL
+Rule 41    type -> INT
+Rule 42    type -> FLOAT
+Rule 43    type -> CHAR
+Rule 44    type -> STRING
+Rule 45    type -> BOOL
+Rule 46    writing -> PRINT OPAR exp CPAR SEMICOL
+Rule 47    writing -> PRINT OPAR CSTRING CPAR SEMICOL
+Rule 48    writing -> PRINT OPAR CCHAR CPAR SEMICOL
+Rule 49    cycle -> WHILE OPAR association CPAR block
+Rule 50    cycle -> DO block WHILE OPAR association CPAR SEMICOL
+Rule 51    exp -> term PLUS exp
+Rule 52    exp -> term MINUS exp
+Rule 53    exp -> term
+Rule 54    term -> term TIMES factor
+Rule 55    term -> factor DIVIDE factor
+Rule 56    term -> factor
+Rule 57    factor -> OPAR exp CPAR
+Rule 58    factor -> varcte
+Rule 59    varcte -> ID OBRAC arrdim
+Rule 60    varcte -> ID
+Rule 61    varcte -> CINT
+Rule 62    varcte -> CFLOAT
+Rule 63    arrdim -> exp CBRAC OBRAC arrdim
+Rule 64    arrdim -> exp CBRAC
+Rule 65    decarr -> ARR type ID OBRAC arrdim SEMICOL
+Rule 66    association -> exp MTHAN exp
+Rule 67    association -> exp LTHAN exp
+Rule 68    association -> exp MTHANE exp
+Rule 69    association -> exp LTHANE exp
+Rule 70    association -> exp NOTEQUAL exp
+Rule 71    association -> exp EQUALTO exp
+Rule 72    association -> exp
+
+Terminals, with rules where they appear
+
+ARR                  : 65
+BOOL                 : 45
+CBRAC                : 63 64
+CBRAK                : 20 23
+CCHAR                : 35 48
+CFLOAT               : 62
+CHAR                 : 43
+CINT                 : 61
+COMA                 : 16 17
+CPAR                 : 15 18 37 46 47 48 49 50 57
+CSTRING              : 36 47
+DIVIDE               : 55
+DO                   : 50
+ELSE                 : 38
+EQUAL                : 32 33
+EQUALTO              : 71
+EXIT                 : 1 2 3 4
+FLOAT                : 42
+FUNCTION             : 15 16
+ID                   : 1 2 3 4 15 15 16 16 17 18 32 33 40 59 60 65
+IF                   : 37
+INT                  : 41
+LTHAN                : 67
+LTHANE               : 69
+MAIN                 : 1 2 3 4
+MINUS                : 52
+MTHAN                : 66
+MTHANE               : 68
+NOTEQUAL             : 70
+OBRAC                : 33 59 63 65
+OBRAK                : 20 21
+OPAR                 : 15 16 37 46 47 48 49 50 57
+PLUS                 : 51
+PRINT                : 46 47 48
+PROGRAM              : 1 2 3 4
+RETURN               : 19
+SEMICOL              : 1 2 3 4 19 34 35 36 40 46 47 48 50 65
+STRING               : 44
+TIMES                : 54
+VAR                  : 40
+WHILE                : 49 50
+error                : 
+
+Nonterminals, with rules where they appear
+
+arrdim               : 33 59 63 65
+assarr               : 10 13 25
+asshelp              : 32 33
+association          : 19 34 37 49 50
+assvar               : 9 12 24
+block                : 1 2 3 4 15 18 21 22 37 38 49 50
+condition            : 28
+cycle                : 30
+decarr               : 5 7 27
+decfunc              : 1 2 9 10 11
+decglobal            : 1 3 5 6
+decvar               : 6 8 26
+else                 : 37
+estatuto             : 20 21 22 23
+exp                  : 46 51 52 57 63 64 66 66 67 67 68 68 69 69 70 70 71 71 72
+factor               : 54 55 55 56
+function             : 11 14
+functionhelp         : 16 17
+main                 : 0
+return               : 31
+term                 : 51 52 53 54
+type                 : 15 15 16 16 17 18 40 65
+varcte               : 58
+writing              : 29
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . main
+    (1) main -> . PROGRAM ID SEMICOL decglobal decfunc MAIN block EXIT
+    (2) main -> . PROGRAM ID SEMICOL decfunc MAIN block EXIT
+    (3) main -> . PROGRAM ID SEMICOL decglobal MAIN block EXIT
+    (4) main -> . PROGRAM ID SEMICOL MAIN block EXIT
+
+    PROGRAM         shift and go to state 1
+
+    main                           shift and go to state 2
+
+state 1
+
+    (1) main -> PROGRAM . ID SEMICOL decglobal decfunc MAIN block EXIT
+    (2) main -> PROGRAM . ID SEMICOL decfunc MAIN block EXIT
+    (3) main -> PROGRAM . ID SEMICOL decglobal MAIN block EXIT
+    (4) main -> PROGRAM . ID SEMICOL MAIN block EXIT
+
+    ID              shift and go to state 3
+
+
+state 2
+
+    (0) S' -> main .
+
+
+
+state 3
+
+    (1) main -> PROGRAM ID . SEMICOL decglobal decfunc MAIN block EXIT
+    (2) main -> PROGRAM ID . SEMICOL decfunc MAIN block EXIT
+    (3) main -> PROGRAM ID . SEMICOL decglobal MAIN block EXIT
+    (4) main -> PROGRAM ID . SEMICOL MAIN block EXIT
+
+    SEMICOL         shift and go to state 4
+
+
+state 4
+
+    (1) main -> PROGRAM ID SEMICOL . decglobal decfunc MAIN block EXIT
+    (2) main -> PROGRAM ID SEMICOL . decfunc MAIN block EXIT
+    (3) main -> PROGRAM ID SEMICOL . decglobal MAIN block EXIT
+    (4) main -> PROGRAM ID SEMICOL . MAIN block EXIT
+    (5) decglobal -> . decarr decglobal
+    (6) decglobal -> . decvar decglobal
+    (7) decglobal -> . decarr
+    (8) decglobal -> . decvar
+    (9) decfunc -> . assvar decfunc
+    (10) decfunc -> . assarr decfunc
+    (11) decfunc -> . function decfunc
+    (12) decfunc -> . assvar
+    (13) decfunc -> . assarr
+    (14) decfunc -> . function
+    (65) decarr -> . ARR type ID OBRAC arrdim SEMICOL
+    (40) decvar -> . VAR type ID SEMICOL
+    (32) assvar -> . ID EQUAL asshelp
+    (33) assarr -> . ID OBRAC arrdim EQUAL asshelp
+    (15) function -> . FUNCTION ID type OPAR type ID CPAR block
+    (16) function -> . FUNCTION ID type OPAR type ID COMA functionhelp
+
+    MAIN            shift and go to state 16
+    ARR             shift and go to state 15
+    VAR             shift and go to state 10
+    ID              shift and go to state 13
+    FUNCTION        shift and go to state 5
+
+    assvar                         shift and go to state 14
+    function                       shift and go to state 9
+    decvar                         shift and go to state 6
+    assarr                         shift and go to state 7
+    decarr                         shift and go to state 11
+    decglobal                      shift and go to state 12
+    decfunc                        shift and go to state 8
+
+state 5
+
+    (15) function -> FUNCTION . ID type OPAR type ID CPAR block
+    (16) function -> FUNCTION . ID type OPAR type ID COMA functionhelp
+
+    ID              shift and go to state 17
+
+
+state 6
+
+    (6) decglobal -> decvar . decglobal
+    (8) decglobal -> decvar .
+    (5) decglobal -> . decarr decglobal
+    (6) decglobal -> . decvar decglobal
+    (7) decglobal -> . decarr
+    (8) decglobal -> . decvar
+    (65) decarr -> . ARR type ID OBRAC arrdim SEMICOL
+    (40) decvar -> . VAR type ID SEMICOL
+
+    MAIN            reduce using rule 8 (decglobal -> decvar .)
+    ID              reduce using rule 8 (decglobal -> decvar .)
+    FUNCTION        reduce using rule 8 (decglobal -> decvar .)
+    ARR             shift and go to state 15
+    VAR             shift and go to state 10
+
+    decglobal                      shift and go to state 18
+    decvar                         shift and go to state 6
+    decarr                         shift and go to state 11
+
+state 7
+
+    (10) decfunc -> assarr . decfunc
+    (13) decfunc -> assarr .
+    (9) decfunc -> . assvar decfunc
+    (10) decfunc -> . assarr decfunc
+    (11) decfunc -> . function decfunc
+    (12) decfunc -> . assvar
+    (13) decfunc -> . assarr
+    (14) decfunc -> . function
+    (32) assvar -> . ID EQUAL asshelp
+    (33) assarr -> . ID OBRAC arrdim EQUAL asshelp
+    (15) function -> . FUNCTION ID type OPAR type ID CPAR block
+    (16) function -> . FUNCTION ID type OPAR type ID COMA functionhelp
+
+    MAIN            reduce using rule 13 (decfunc -> assarr .)
+    ID              shift and go to state 13
+    FUNCTION        shift and go to state 5
+
+    assvar                         shift and go to state 14
+    function                       shift and go to state 9
+    assarr                         shift and go to state 7
+    decfunc                        shift and go to state 19
+
+state 8
+
+    (2) main -> PROGRAM ID SEMICOL decfunc . MAIN block EXIT
+
+    MAIN            shift and go to state 20
+
+
+state 9
+
+    (11) decfunc -> function . decfunc
+    (14) decfunc -> function .
+    (9) decfunc -> . assvar decfunc
+    (10) decfunc -> . assarr decfunc
+    (11) decfunc -> . function decfunc
+    (12) decfunc -> . assvar
+    (13) decfunc -> . assarr
+    (14) decfunc -> . function
+    (32) assvar -> . ID EQUAL asshelp
+    (33) assarr -> . ID OBRAC arrdim EQUAL asshelp
+    (15) function -> . FUNCTION ID type OPAR type ID CPAR block
+    (16) function -> . FUNCTION ID type OPAR type ID COMA functionhelp
+
+    MAIN            reduce using rule 14 (decfunc -> function .)
+    ID              shift and go to state 13
+    FUNCTION        shift and go to state 5
+
+    function                       shift and go to state 9
+    assvar                         shift and go to state 14
+    assarr                         shift and go to state 7
+    decfunc                        shift and go to state 21
+
+state 10
+
+    (40) decvar -> VAR . type ID SEMICOL
+    (41) type -> . INT
+    (42) type -> . FLOAT
+    (43) type -> . CHAR
+    (44) type -> . STRING
+    (45) type -> . BOOL
+
+    INT             shift and go to state 24
+    FLOAT           shift and go to state 22
+    CHAR            shift and go to state 25
+    STRING          shift and go to state 23
+    BOOL            shift and go to state 26
+
+    type                           shift and go to state 27
+
+state 11
+
+    (5) decglobal -> decarr . decglobal
+    (7) decglobal -> decarr .
+    (5) decglobal -> . decarr decglobal
+    (6) decglobal -> . decvar decglobal
+    (7) decglobal -> . decarr
+    (8) decglobal -> . decvar
+    (65) decarr -> . ARR type ID OBRAC arrdim SEMICOL
+    (40) decvar -> . VAR type ID SEMICOL
+
+    MAIN            reduce using rule 7 (decglobal -> decarr .)
+    ID              reduce using rule 7 (decglobal -> decarr .)
+    FUNCTION        reduce using rule 7 (decglobal -> decarr .)
+    ARR             shift and go to state 15
+    VAR             shift and go to state 10
+
+    decglobal                      shift and go to state 28
+    decvar                         shift and go to state 6
+    decarr                         shift and go to state 11
+
+state 12
+
+    (1) main -> PROGRAM ID SEMICOL decglobal . decfunc MAIN block EXIT
+    (3) main -> PROGRAM ID SEMICOL decglobal . MAIN block EXIT
+    (9) decfunc -> . assvar decfunc
+    (10) decfunc -> . assarr decfunc
+    (11) decfunc -> . function decfunc
+    (12) decfunc -> . assvar
+    (13) decfunc -> . assarr
+    (14) decfunc -> . function
+    (32) assvar -> . ID EQUAL asshelp
+    (33) assarr -> . ID OBRAC arrdim EQUAL asshelp
+    (15) function -> . FUNCTION ID type OPAR type ID CPAR block
+    (16) function -> . FUNCTION ID type OPAR type ID COMA functionhelp
+
+    MAIN            shift and go to state 29
+    ID              shift and go to state 13
+    FUNCTION        shift and go to state 5
+
+    assvar                         shift and go to state 14
+    function                       shift and go to state 9
+    assarr                         shift and go to state 7
+    decfunc                        shift and go to state 30
+
+state 13
+
+    (32) assvar -> ID . EQUAL asshelp
+    (33) assarr -> ID . OBRAC arrdim EQUAL asshelp
+
+    EQUAL           shift and go to state 32
+    OBRAC           shift and go to state 31
+
+
+state 14
+
+    (9) decfunc -> assvar . decfunc
+    (12) decfunc -> assvar .
+    (9) decfunc -> . assvar decfunc
+    (10) decfunc -> . assarr decfunc
+    (11) decfunc -> . function decfunc
+    (12) decfunc -> . assvar
+    (13) decfunc -> . assarr
+    (14) decfunc -> . function
+    (32) assvar -> . ID EQUAL asshelp
+    (33) assarr -> . ID OBRAC arrdim EQUAL asshelp
+    (15) function -> . FUNCTION ID type OPAR type ID CPAR block
+    (16) function -> . FUNCTION ID type OPAR type ID COMA functionhelp
+
+    MAIN            reduce using rule 12 (decfunc -> assvar .)
+    ID              shift and go to state 13
+    FUNCTION        shift and go to state 5
+
+    assvar                         shift and go to state 14
+    function                       shift and go to state 9
+    assarr                         shift and go to state 7
+    decfunc                        shift and go to state 33
+
+state 15
+
+    (65) decarr -> ARR . type ID OBRAC arrdim SEMICOL
+    (41) type -> . INT
+    (42) type -> . FLOAT
+    (43) type -> . CHAR
+    (44) type -> . STRING
+    (45) type -> . BOOL
+
+    INT             shift and go to state 24
+    FLOAT           shift and go to state 22
+    CHAR            shift and go to state 25
+    STRING          shift and go to state 23
+    BOOL            shift and go to state 26
+
+    type                           shift and go to state 34
+
+state 16
+
+    (4) main -> PROGRAM ID SEMICOL MAIN . block EXIT
+    (20) block -> . OBRAK estatuto CBRAK
+    (21) block -> . OBRAK estatuto block
+    (22) block -> . estatuto block
+    (23) block -> . estatuto CBRAK
+    (24) estatuto -> . assvar
+    (25) estatuto -> . assarr
+    (26) estatuto -> . decvar
+    (27) estatuto -> . decarr
+    (28) estatuto -> . condition
+    (29) estatuto -> . writing
+    (30) estatuto -> . cycle
+    (31) estatuto -> . return
+    (32) assvar -> . ID EQUAL asshelp
+    (33) assarr -> . ID OBRAC arrdim EQUAL asshelp
+    (40) decvar -> . VAR type ID SEMICOL
+    (65) decarr -> . ARR type ID OBRAC arrdim SEMICOL
+    (37) condition -> . IF OPAR association CPAR block else
+    (46) writing -> . PRINT OPAR exp CPAR SEMICOL
+    (47) writing -> . PRINT OPAR CSTRING CPAR SEMICOL
+    (48) writing -> . PRINT OPAR CCHAR CPAR SEMICOL
+    (49) cycle -> . WHILE OPAR association CPAR block
+    (50) cycle -> . DO block WHILE OPAR association CPAR SEMICOL
+    (19) return -> . RETURN association SEMICOL
+
+    OBRAK           shift and go to state 39
+    ID              shift and go to state 13
+    VAR             shift and go to state 10
+    ARR             shift and go to state 15
+    IF              shift and go to state 43
+    PRINT           shift and go to state 38
+    WHILE           shift and go to state 49
+    DO              shift and go to state 35
+    RETURN          shift and go to state 36
+
+    assvar                         shift and go to state 48
+    return                         shift and go to state 44
+    decvar                         shift and go to state 37
+    assarr                         shift and go to state 40
+    estatuto                       shift and go to state 41
+    decarr                         shift and go to state 45
+    condition                      shift and go to state 46
+    writing                        shift and go to state 42
+    block                          shift and go to state 50
+    cycle                          shift and go to state 47
+
+state 17
+
+    (15) function -> FUNCTION ID . type OPAR type ID CPAR block
+    (16) function -> FUNCTION ID . type OPAR type ID COMA functionhelp
+    (41) type -> . INT
+    (42) type -> . FLOAT
+    (43) type -> . CHAR
+    (44) type -> . STRING
+    (45) type -> . BOOL
+
+    INT             shift and go to state 24
+    FLOAT           shift and go to state 22
+    CHAR            shift and go to state 25
+    STRING          shift and go to state 23
+    BOOL            shift and go to state 26
+
+    type                           shift and go to state 51
+
+state 18
+
+    (6) decglobal -> decvar decglobal .
+
+    MAIN            reduce using rule 6 (decglobal -> decvar decglobal .)
+    ID              reduce using rule 6 (decglobal -> decvar decglobal .)
+    FUNCTION        reduce using rule 6 (decglobal -> decvar decglobal .)
+
+
+state 19
+
+    (10) decfunc -> assarr decfunc .
+
+    MAIN            reduce using rule 10 (decfunc -> assarr decfunc .)
+
+
+state 20
+
+    (2) main -> PROGRAM ID SEMICOL decfunc MAIN . block EXIT
+    (20) block -> . OBRAK estatuto CBRAK
+    (21) block -> . OBRAK estatuto block
+    (22) block -> . estatuto block
+    (23) block -> . estatuto CBRAK
+    (24) estatuto -> . assvar
+    (25) estatuto -> . assarr
+    (26) estatuto -> . decvar
+    (27) estatuto -> . decarr
+    (28) estatuto -> . condition
+    (29) estatuto -> . writing
+    (30) estatuto -> . cycle
+    (31) estatuto -> . return
+    (32) assvar -> . ID EQUAL asshelp
+    (33) assarr -> . ID OBRAC arrdim EQUAL asshelp
+    (40) decvar -> . VAR type ID SEMICOL
+    (65) decarr -> . ARR type ID OBRAC arrdim SEMICOL
+    (37) condition -> . IF OPAR association CPAR block else
+    (46) writing -> . PRINT OPAR exp CPAR SEMICOL
+    (47) writing -> . PRINT OPAR CSTRING CPAR SEMICOL
+    (48) writing -> . PRINT OPAR CCHAR CPAR SEMICOL
+    (49) cycle -> . WHILE OPAR association CPAR block
+    (50) cycle -> . DO block WHILE OPAR association CPAR SEMICOL
+    (19) return -> . RETURN association SEMICOL
+
+    OBRAK           shift and go to state 39
+    ID              shift and go to state 13
+    VAR             shift and go to state 10
+    ARR             shift and go to state 15
+    IF              shift and go to state 43
+    PRINT           shift and go to state 38
+    WHILE           shift and go to state 49
+    DO              shift and go to state 35
+    RETURN          shift and go to state 36
+
+    assvar                         shift and go to state 48
+    return                         shift and go to state 44
+    decvar                         shift and go to state 37
+    assarr                         shift and go to state 40
+    estatuto                       shift and go to state 41
+    decarr                         shift and go to state 45
+    condition                      shift and go to state 46
+    writing                        shift and go to state 42
+    block                          shift and go to state 52
+    cycle                          shift and go to state 47
+
+state 21
+
+    (11) decfunc -> function decfunc .
+
+    MAIN            reduce using rule 11 (decfunc -> function decfunc .)
+
+
+state 22
+
+    (42) type -> FLOAT .
+
+    ID              reduce using rule 42 (type -> FLOAT .)
+    OPAR            reduce using rule 42 (type -> FLOAT .)
+
+
+state 23
+
+    (44) type -> STRING .
+
+    ID              reduce using rule 44 (type -> STRING .)
+    OPAR            reduce using rule 44 (type -> STRING .)
+
+
+state 24
+
+    (41) type -> INT .
+
+    ID              reduce using rule 41 (type -> INT .)
+    OPAR            reduce using rule 41 (type -> INT .)
+
+
+state 25
+
+    (43) type -> CHAR .
+
+    ID              reduce using rule 43 (type -> CHAR .)
+    OPAR            reduce using rule 43 (type -> CHAR .)
+
+
+state 26
+
+    (45) type -> BOOL .
+
+    ID              reduce using rule 45 (type -> BOOL .)
+    OPAR            reduce using rule 45 (type -> BOOL .)
+
+
+state 27
+
+    (40) decvar -> VAR type . ID SEMICOL
+
+    ID              shift and go to state 53
+
+
+state 28
+
+    (5) decglobal -> decarr decglobal .
+
+    MAIN            reduce using rule 5 (decglobal -> decarr decglobal .)
+    ID              reduce using rule 5 (decglobal -> decarr decglobal .)
+    FUNCTION        reduce using rule 5 (decglobal -> decarr decglobal .)
+
+
+state 29
+
+    (3) main -> PROGRAM ID SEMICOL decglobal MAIN . block EXIT
+    (20) block -> . OBRAK estatuto CBRAK
+    (21) block -> . OBRAK estatuto block
+    (22) block -> . estatuto block
+    (23) block -> . estatuto CBRAK
+    (24) estatuto -> . assvar
+    (25) estatuto -> . assarr
+    (26) estatuto -> . decvar
+    (27) estatuto -> . decarr
+    (28) estatuto -> . condition
+    (29) estatuto -> . writing
+    (30) estatuto -> . cycle
+    (31) estatuto -> . return
+    (32) assvar -> . ID EQUAL asshelp
+    (33) assarr -> . ID OBRAC arrdim EQUAL asshelp
+    (40) decvar -> . VAR type ID SEMICOL
+    (65) decarr -> . ARR type ID OBRAC arrdim SEMICOL
+    (37) condition -> . IF OPAR association CPAR block else
+    (46) writing -> . PRINT OPAR exp CPAR SEMICOL
+    (47) writing -> . PRINT OPAR CSTRING CPAR SEMICOL
+    (48) writing -> . PRINT OPAR CCHAR CPAR SEMICOL
+    (49) cycle -> . WHILE OPAR association CPAR block
+    (50) cycle -> . DO block WHILE OPAR association CPAR SEMICOL
+    (19) return -> . RETURN association SEMICOL
+
+    OBRAK           shift and go to state 39
+    ID              shift and go to state 13
+    VAR             shift and go to state 10
+    ARR             shift and go to state 15
+    IF              shift and go to state 43
+    PRINT           shift and go to state 38
+    WHILE           shift and go to state 49
+    DO              shift and go to state 35
+    RETURN          shift and go to state 36
+
+    assvar                         shift and go to state 48
+    return                         shift and go to state 44
+    decvar                         shift and go to state 37
+    assarr                         shift and go to state 40
+    estatuto                       shift and go to state 41
+    decarr                         shift and go to state 45
+    condition                      shift and go to state 46
+    writing                        shift and go to state 42
+    block                          shift and go to state 54
+    cycle                          shift and go to state 47
+
+state 30
+
+    (1) main -> PROGRAM ID SEMICOL decglobal decfunc . MAIN block EXIT
+
+    MAIN            shift and go to state 55
+
+
+state 31
+
+    (33) assarr -> ID OBRAC . arrdim EQUAL asshelp
+    (63) arrdim -> . exp CBRAC OBRAC arrdim
+    (64) arrdim -> . exp CBRAC
+    (51) exp -> . term PLUS exp
+    (52) exp -> . term MINUS exp
+    (53) exp -> . term
+    (54) term -> . term TIMES factor
+    (55) term -> . factor DIVIDE factor
+    (56) term -> . factor
+    (57) factor -> . OPAR exp CPAR
+    (58) factor -> . varcte
+    (59) varcte -> . ID OBRAC arrdim
+    (60) varcte -> . ID
+    (61) varcte -> . CINT
+    (62) varcte -> . CFLOAT
+
+    OPAR            shift and go to state 60
+    ID              shift and go to state 62
+    CINT            shift and go to state 61
+    CFLOAT          shift and go to state 63
+
+    term                           shift and go to state 57
+    varcte                         shift and go to state 56
+    exp                            shift and go to state 58
+    factor                         shift and go to state 59
+    arrdim                         shift and go to state 64
+
+state 32
+
+    (32) assvar -> ID EQUAL . asshelp
+    (34) asshelp -> . association SEMICOL
+    (35) asshelp -> . CCHAR SEMICOL
+    (36) asshelp -> . CSTRING SEMICOL
+    (66) association -> . exp MTHAN exp
+    (67) association -> . exp LTHAN exp
+    (68) association -> . exp MTHANE exp
+    (69) association -> . exp LTHANE exp
+    (70) association -> . exp NOTEQUAL exp
+    (71) association -> . exp EQUALTO exp
+    (72) association -> . exp
+    (51) exp -> . term PLUS exp
+    (52) exp -> . term MINUS exp
+    (53) exp -> . term
+    (54) term -> . term TIMES factor
+    (55) term -> . factor DIVIDE factor
+    (56) term -> . factor
+    (57) factor -> . OPAR exp CPAR
+    (58) factor -> . varcte
+    (59) varcte -> . ID OBRAC arrdim
+    (60) varcte -> . ID
+    (61) varcte -> . CINT
+    (62) varcte -> . CFLOAT
+
+    CCHAR           shift and go to state 66
+    CSTRING         shift and go to state 67
+    OPAR            shift and go to state 60
+    ID              shift and go to state 62
+    CINT            shift and go to state 61
+    CFLOAT          shift and go to state 63
+
+    term                           shift and go to state 57
+    varcte                         shift and go to state 56
+    asshelp                        shift and go to state 65
+    exp                            shift and go to state 69
+    factor                         shift and go to state 59
+    association                    shift and go to state 68
+
+state 33
+
+    (9) decfunc -> assvar decfunc .
+
+    MAIN            reduce using rule 9 (decfunc -> assvar decfunc .)
+
+
+state 34
+
+    (65) decarr -> ARR type . ID OBRAC arrdim SEMICOL
+
+    ID              shift and go to state 70
+
+
+state 35
+
+    (50) cycle -> DO . block WHILE OPAR association CPAR SEMICOL
+    (20) block -> . OBRAK estatuto CBRAK
+    (21) block -> . OBRAK estatuto block
+    (22) block -> . estatuto block
+    (23) block -> . estatuto CBRAK
+    (24) estatuto -> . assvar
+    (25) estatuto -> . assarr
+    (26) estatuto -> . decvar
+    (27) estatuto -> . decarr
+    (28) estatuto -> . condition
+    (29) estatuto -> . writing
+    (30) estatuto -> . cycle
+    (31) estatuto -> . return
+    (32) assvar -> . ID EQUAL asshelp
+    (33) assarr -> . ID OBRAC arrdim EQUAL asshelp
+    (40) decvar -> . VAR type ID SEMICOL
+    (65) decarr -> . ARR type ID OBRAC arrdim SEMICOL
+    (37) condition -> . IF OPAR association CPAR block else
+    (46) writing -> . PRINT OPAR exp CPAR SEMICOL
+    (47) writing -> . PRINT OPAR CSTRING CPAR SEMICOL
+    (48) writing -> . PRINT OPAR CCHAR CPAR SEMICOL
+    (49) cycle -> . WHILE OPAR association CPAR block
+    (50) cycle -> . DO block WHILE OPAR association CPAR SEMICOL
+    (19) return -> . RETURN association SEMICOL
+
+    OBRAK           shift and go to state 39
+    ID              shift and go to state 13
+    VAR             shift and go to state 10
+    ARR             shift and go to state 15
+    IF              shift and go to state 43
+    PRINT           shift and go to state 38
+    WHILE           shift and go to state 49
+    DO              shift and go to state 35
+    RETURN          shift and go to state 36
+
+    assvar                         shift and go to state 48
+    return                         shift and go to state 44
+    decvar                         shift and go to state 37
+    assarr                         shift and go to state 40
+    estatuto                       shift and go to state 41
+    condition                      shift and go to state 46
+    decarr                         shift and go to state 45
+    block                          shift and go to state 71
+    writing                        shift and go to state 42
+    cycle                          shift and go to state 47
+
+state 36
+
+    (19) return -> RETURN . association SEMICOL
+    (66) association -> . exp MTHAN exp
+    (67) association -> . exp LTHAN exp
+    (68) association -> . exp MTHANE exp
+    (69) association -> . exp LTHANE exp
+    (70) association -> . exp NOTEQUAL exp
+    (71) association -> . exp EQUALTO exp
+    (72) association -> . exp
+    (51) exp -> . term PLUS exp
+    (52) exp -> . term MINUS exp
+    (53) exp -> . term
+    (54) term -> . term TIMES factor
+    (55) term -> . factor DIVIDE factor
+    (56) term -> . factor
+    (57) factor -> . OPAR exp CPAR
+    (58) factor -> . varcte
+    (59) varcte -> . ID OBRAC arrdim
+    (60) varcte -> . ID
+    (61) varcte -> . CINT
+    (62) varcte -> . CFLOAT
+
+    OPAR            shift and go to state 60
+    ID              shift and go to state 62
+    CINT            shift and go to state 61
+    CFLOAT          shift and go to state 63
+
+    term                           shift and go to state 57
+    varcte                         shift and go to state 56
+    exp                            shift and go to state 69
+    factor                         shift and go to state 59
+    association                    shift and go to state 72
+
+state 37
+
+    (26) estatuto -> decvar .
+
+    CBRAK           reduce using rule 26 (estatuto -> decvar .)
+    OBRAK           reduce using rule 26 (estatuto -> decvar .)
+    ID              reduce using rule 26 (estatuto -> decvar .)
+    VAR             reduce using rule 26 (estatuto -> decvar .)
+    ARR             reduce using rule 26 (estatuto -> decvar .)
+    IF              reduce using rule 26 (estatuto -> decvar .)
+    PRINT           reduce using rule 26 (estatuto -> decvar .)
+    WHILE           reduce using rule 26 (estatuto -> decvar .)
+    DO              reduce using rule 26 (estatuto -> decvar .)
+    RETURN          reduce using rule 26 (estatuto -> decvar .)
+
+
+state 38
+
+    (46) writing -> PRINT . OPAR exp CPAR SEMICOL
+    (47) writing -> PRINT . OPAR CSTRING CPAR SEMICOL
+    (48) writing -> PRINT . OPAR CCHAR CPAR SEMICOL
+
+    OPAR            shift and go to state 73
+
+
+state 39
+
+    (20) block -> OBRAK . estatuto CBRAK
+    (21) block -> OBRAK . estatuto block
+    (24) estatuto -> . assvar
+    (25) estatuto -> . assarr
+    (26) estatuto -> . decvar
+    (27) estatuto -> . decarr
+    (28) estatuto -> . condition
+    (29) estatuto -> . writing
+    (30) estatuto -> . cycle
+    (31) estatuto -> . return
+    (32) assvar -> . ID EQUAL asshelp
+    (33) assarr -> . ID OBRAC arrdim EQUAL asshelp
+    (40) decvar -> . VAR type ID SEMICOL
+    (65) decarr -> . ARR type ID OBRAC arrdim SEMICOL
+    (37) condition -> . IF OPAR association CPAR block else
+    (46) writing -> . PRINT OPAR exp CPAR SEMICOL
+    (47) writing -> . PRINT OPAR CSTRING CPAR SEMICOL
+    (48) writing -> . PRINT OPAR CCHAR CPAR SEMICOL
+    (49) cycle -> . WHILE OPAR association CPAR block
+    (50) cycle -> . DO block WHILE OPAR association CPAR SEMICOL
+    (19) return -> . RETURN association SEMICOL
+
+    ID              shift and go to state 13
+    VAR             shift and go to state 10
+    ARR             shift and go to state 15
+    IF              shift and go to state 43
+    PRINT           shift and go to state 38
+    WHILE           shift and go to state 49
+    DO              shift and go to state 35
+    RETURN          shift and go to state 36
+
+    assvar                         shift and go to state 48
+    return                         shift and go to state 44
+    decvar                         shift and go to state 37
+    assarr                         shift and go to state 40
+    estatuto                       shift and go to state 74
+    decarr                         shift and go to state 45
+    condition                      shift and go to state 46
+    writing                        shift and go to state 42
+    cycle                          shift and go to state 47
+
+state 40
+
+    (25) estatuto -> assarr .
+
+    CBRAK           reduce using rule 25 (estatuto -> assarr .)
+    OBRAK           reduce using rule 25 (estatuto -> assarr .)
+    ID              reduce using rule 25 (estatuto -> assarr .)
+    VAR             reduce using rule 25 (estatuto -> assarr .)
+    ARR             reduce using rule 25 (estatuto -> assarr .)
+    IF              reduce using rule 25 (estatuto -> assarr .)
+    PRINT           reduce using rule 25 (estatuto -> assarr .)
+    WHILE           reduce using rule 25 (estatuto -> assarr .)
+    DO              reduce using rule 25 (estatuto -> assarr .)
+    RETURN          reduce using rule 25 (estatuto -> assarr .)
+
+
+state 41
+
+    (22) block -> estatuto . block
+    (23) block -> estatuto . CBRAK
+    (20) block -> . OBRAK estatuto CBRAK
+    (21) block -> . OBRAK estatuto block
+    (22) block -> . estatuto block
+    (23) block -> . estatuto CBRAK
+    (24) estatuto -> . assvar
+    (25) estatuto -> . assarr
+    (26) estatuto -> . decvar
+    (27) estatuto -> . decarr
+    (28) estatuto -> . condition
+    (29) estatuto -> . writing
+    (30) estatuto -> . cycle
+    (31) estatuto -> . return
+    (32) assvar -> . ID EQUAL asshelp
+    (33) assarr -> . ID OBRAC arrdim EQUAL asshelp
+    (40) decvar -> . VAR type ID SEMICOL
+    (65) decarr -> . ARR type ID OBRAC arrdim SEMICOL
+    (37) condition -> . IF OPAR association CPAR block else
+    (46) writing -> . PRINT OPAR exp CPAR SEMICOL
+    (47) writing -> . PRINT OPAR CSTRING CPAR SEMICOL
+    (48) writing -> . PRINT OPAR CCHAR CPAR SEMICOL
+    (49) cycle -> . WHILE OPAR association CPAR block
+    (50) cycle -> . DO block WHILE OPAR association CPAR SEMICOL
+    (19) return -> . RETURN association SEMICOL
+
+    CBRAK           shift and go to state 75
+    OBRAK           shift and go to state 39
+    ID              shift and go to state 13
+    VAR             shift and go to state 10
+    ARR             shift and go to state 15
+    IF              shift and go to state 43
+    PRINT           shift and go to state 38
+    WHILE           shift and go to state 49
+    DO              shift and go to state 35
+    RETURN          shift and go to state 36
+
+    assvar                         shift and go to state 48
+    return                         shift and go to state 44
+    decvar                         shift and go to state 37
+    assarr                         shift and go to state 40
+    estatuto                       shift and go to state 41
+    decarr                         shift and go to state 45
+    condition                      shift and go to state 46
+    writing                        shift and go to state 42
+    block                          shift and go to state 76
+    cycle                          shift and go to state 47
+
+state 42
+
+    (29) estatuto -> writing .
+
+    CBRAK           reduce using rule 29 (estatuto -> writing .)
+    OBRAK           reduce using rule 29 (estatuto -> writing .)
+    ID              reduce using rule 29 (estatuto -> writing .)
+    VAR             reduce using rule 29 (estatuto -> writing .)
+    ARR             reduce using rule 29 (estatuto -> writing .)
+    IF              reduce using rule 29 (estatuto -> writing .)
+    PRINT           reduce using rule 29 (estatuto -> writing .)
+    WHILE           reduce using rule 29 (estatuto -> writing .)
+    DO              reduce using rule 29 (estatuto -> writing .)
+    RETURN          reduce using rule 29 (estatuto -> writing .)
+
+
+state 43
+
+    (37) condition -> IF . OPAR association CPAR block else
+
+    OPAR            shift and go to state 77
+
+
+state 44
+
+    (31) estatuto -> return .
+
+    CBRAK           reduce using rule 31 (estatuto -> return .)
+    OBRAK           reduce using rule 31 (estatuto -> return .)
+    ID              reduce using rule 31 (estatuto -> return .)
+    VAR             reduce using rule 31 (estatuto -> return .)
+    ARR             reduce using rule 31 (estatuto -> return .)
+    IF              reduce using rule 31 (estatuto -> return .)
+    PRINT           reduce using rule 31 (estatuto -> return .)
+    WHILE           reduce using rule 31 (estatuto -> return .)
+    DO              reduce using rule 31 (estatuto -> return .)
+    RETURN          reduce using rule 31 (estatuto -> return .)
+
+
+state 45
+
+    (27) estatuto -> decarr .
+
+    CBRAK           reduce using rule 27 (estatuto -> decarr .)
+    OBRAK           reduce using rule 27 (estatuto -> decarr .)
+    ID              reduce using rule 27 (estatuto -> decarr .)
+    VAR             reduce using rule 27 (estatuto -> decarr .)
+    ARR             reduce using rule 27 (estatuto -> decarr .)
+    IF              reduce using rule 27 (estatuto -> decarr .)
+    PRINT           reduce using rule 27 (estatuto -> decarr .)
+    WHILE           reduce using rule 27 (estatuto -> decarr .)
+    DO              reduce using rule 27 (estatuto -> decarr .)
+    RETURN          reduce using rule 27 (estatuto -> decarr .)
+
+
+state 46
+
+    (28) estatuto -> condition .
+
+    CBRAK           reduce using rule 28 (estatuto -> condition .)
+    OBRAK           reduce using rule 28 (estatuto -> condition .)
+    ID              reduce using rule 28 (estatuto -> condition .)
+    VAR             reduce using rule 28 (estatuto -> condition .)
+    ARR             reduce using rule 28 (estatuto -> condition .)
+    IF              reduce using rule 28 (estatuto -> condition .)
+    PRINT           reduce using rule 28 (estatuto -> condition .)
+    WHILE           reduce using rule 28 (estatuto -> condition .)
+    DO              reduce using rule 28 (estatuto -> condition .)
+    RETURN          reduce using rule 28 (estatuto -> condition .)
+
+
+state 47
+
+    (30) estatuto -> cycle .
+
+    CBRAK           reduce using rule 30 (estatuto -> cycle .)
+    OBRAK           reduce using rule 30 (estatuto -> cycle .)
+    ID              reduce using rule 30 (estatuto -> cycle .)
+    VAR             reduce using rule 30 (estatuto -> cycle .)
+    ARR             reduce using rule 30 (estatuto -> cycle .)
+    IF              reduce using rule 30 (estatuto -> cycle .)
+    PRINT           reduce using rule 30 (estatuto -> cycle .)
+    WHILE           reduce using rule 30 (estatuto -> cycle .)
+    DO              reduce using rule 30 (estatuto -> cycle .)
+    RETURN          reduce using rule 30 (estatuto -> cycle .)
+
+
+state 48
+
+    (24) estatuto -> assvar .
+
+    CBRAK           reduce using rule 24 (estatuto -> assvar .)
+    OBRAK           reduce using rule 24 (estatuto -> assvar .)
+    ID              reduce using rule 24 (estatuto -> assvar .)
+    VAR             reduce using rule 24 (estatuto -> assvar .)
+    ARR             reduce using rule 24 (estatuto -> assvar .)
+    IF              reduce using rule 24 (estatuto -> assvar .)
+    PRINT           reduce using rule 24 (estatuto -> assvar .)
+    WHILE           reduce using rule 24 (estatuto -> assvar .)
+    DO              reduce using rule 24 (estatuto -> assvar .)
+    RETURN          reduce using rule 24 (estatuto -> assvar .)
+
+
+state 49
+
+    (49) cycle -> WHILE . OPAR association CPAR block
+
+    OPAR            shift and go to state 78
+
+
+state 50
+
+    (4) main -> PROGRAM ID SEMICOL MAIN block . EXIT
+
+    EXIT            shift and go to state 79
+
+
+state 51
+
+    (15) function -> FUNCTION ID type . OPAR type ID CPAR block
+    (16) function -> FUNCTION ID type . OPAR type ID COMA functionhelp
+
+    OPAR            shift and go to state 80
+
+
+state 52
+
+    (2) main -> PROGRAM ID SEMICOL decfunc MAIN block . EXIT
+
+    EXIT            shift and go to state 81
+
+
+state 53
+
+    (40) decvar -> VAR type ID . SEMICOL
+
+    SEMICOL         shift and go to state 82
+
+
+state 54
+
+    (3) main -> PROGRAM ID SEMICOL decglobal MAIN block . EXIT
+
+    EXIT            shift and go to state 83
+
+
+state 55
+
+    (1) main -> PROGRAM ID SEMICOL decglobal decfunc MAIN . block EXIT
+    (20) block -> . OBRAK estatuto CBRAK
+    (21) block -> . OBRAK estatuto block
+    (22) block -> . estatuto block
+    (23) block -> . estatuto CBRAK
+    (24) estatuto -> . assvar
+    (25) estatuto -> . assarr
+    (26) estatuto -> . decvar
+    (27) estatuto -> . decarr
+    (28) estatuto -> . condition
+    (29) estatuto -> . writing
+    (30) estatuto -> . cycle
+    (31) estatuto -> . return
+    (32) assvar -> . ID EQUAL asshelp
+    (33) assarr -> . ID OBRAC arrdim EQUAL asshelp
+    (40) decvar -> . VAR type ID SEMICOL
+    (65) decarr -> . ARR type ID OBRAC arrdim SEMICOL
+    (37) condition -> . IF OPAR association CPAR block else
+    (46) writing -> . PRINT OPAR exp CPAR SEMICOL
+    (47) writing -> . PRINT OPAR CSTRING CPAR SEMICOL
+    (48) writing -> . PRINT OPAR CCHAR CPAR SEMICOL
+    (49) cycle -> . WHILE OPAR association CPAR block
+    (50) cycle -> . DO block WHILE OPAR association CPAR SEMICOL
+    (19) return -> . RETURN association SEMICOL
+
+    OBRAK           shift and go to state 39
+    ID              shift and go to state 13
+    VAR             shift and go to state 10
+    ARR             shift and go to state 15
+    IF              shift and go to state 43
+    PRINT           shift and go to state 38
+    WHILE           shift and go to state 49
+    DO              shift and go to state 35
+    RETURN          shift and go to state 36
+
+    assvar                         shift and go to state 48
+    return                         shift and go to state 44
+    decvar                         shift and go to state 37
+    assarr                         shift and go to state 40
+    estatuto                       shift and go to state 41
+    decarr                         shift and go to state 45
+    condition                      shift and go to state 46
+    writing                        shift and go to state 42
+    block                          shift and go to state 84
+    cycle                          shift and go to state 47
+
+state 56
+
+    (58) factor -> varcte .
+
+    DIVIDE          reduce using rule 58 (factor -> varcte .)
+    PLUS            reduce using rule 58 (factor -> varcte .)
+    MINUS           reduce using rule 58 (factor -> varcte .)
+    TIMES           reduce using rule 58 (factor -> varcte .)
+    CBRAC           reduce using rule 58 (factor -> varcte .)
+    MTHAN           reduce using rule 58 (factor -> varcte .)
+    LTHAN           reduce using rule 58 (factor -> varcte .)
+    MTHANE          reduce using rule 58 (factor -> varcte .)
+    LTHANE          reduce using rule 58 (factor -> varcte .)
+    NOTEQUAL        reduce using rule 58 (factor -> varcte .)
+    EQUALTO         reduce using rule 58 (factor -> varcte .)
+    CPAR            reduce using rule 58 (factor -> varcte .)
+    SEMICOL         reduce using rule 58 (factor -> varcte .)
+
+
+state 57
+
+    (51) exp -> term . PLUS exp
+    (52) exp -> term . MINUS exp
+    (53) exp -> term .
+    (54) term -> term . TIMES factor
+
+    PLUS            shift and go to state 86
+    MINUS           shift and go to state 87
+    MTHAN           reduce using rule 53 (exp -> term .)
+    LTHAN           reduce using rule 53 (exp -> term .)
+    MTHANE          reduce using rule 53 (exp -> term .)
+    LTHANE          reduce using rule 53 (exp -> term .)
+    NOTEQUAL        reduce using rule 53 (exp -> term .)
+    EQUALTO         reduce using rule 53 (exp -> term .)
+    CPAR            reduce using rule 53 (exp -> term .)
+    SEMICOL         reduce using rule 53 (exp -> term .)
+    CBRAC           reduce using rule 53 (exp -> term .)
+    TIMES           shift and go to state 85
+
+
+state 58
+
+    (63) arrdim -> exp . CBRAC OBRAC arrdim
+    (64) arrdim -> exp . CBRAC
+
+    CBRAC           shift and go to state 88
+
+
+state 59
+
+    (55) term -> factor . DIVIDE factor
+    (56) term -> factor .
+
+    DIVIDE          shift and go to state 89
+    PLUS            reduce using rule 56 (term -> factor .)
+    MINUS           reduce using rule 56 (term -> factor .)
+    TIMES           reduce using rule 56 (term -> factor .)
+    CPAR            reduce using rule 56 (term -> factor .)
+    SEMICOL         reduce using rule 56 (term -> factor .)
+    MTHAN           reduce using rule 56 (term -> factor .)
+    LTHAN           reduce using rule 56 (term -> factor .)
+    MTHANE          reduce using rule 56 (term -> factor .)
+    LTHANE          reduce using rule 56 (term -> factor .)
+    NOTEQUAL        reduce using rule 56 (term -> factor .)
+    EQUALTO         reduce using rule 56 (term -> factor .)
+    CBRAC           reduce using rule 56 (term -> factor .)
+
+
+state 60
+
+    (57) factor -> OPAR . exp CPAR
+    (51) exp -> . term PLUS exp
+    (52) exp -> . term MINUS exp
+    (53) exp -> . term
+    (54) term -> . term TIMES factor
+    (55) term -> . factor DIVIDE factor
+    (56) term -> . factor
+    (57) factor -> . OPAR exp CPAR
+    (58) factor -> . varcte
+    (59) varcte -> . ID OBRAC arrdim
+    (60) varcte -> . ID
+    (61) varcte -> . CINT
+    (62) varcte -> . CFLOAT
+
+    OPAR            shift and go to state 60
+    ID              shift and go to state 62
+    CINT            shift and go to state 61
+    CFLOAT          shift and go to state 63
+
+    term                           shift and go to state 57
+    varcte                         shift and go to state 56
+    exp                            shift and go to state 90
+    factor                         shift and go to state 59
+
+state 61
+
+    (61) varcte -> CINT .
+
+    DIVIDE          reduce using rule 61 (varcte -> CINT .)
+    PLUS            reduce using rule 61 (varcte -> CINT .)
+    MINUS           reduce using rule 61 (varcte -> CINT .)
+    TIMES           reduce using rule 61 (varcte -> CINT .)
+    CBRAC           reduce using rule 61 (varcte -> CINT .)
+    MTHAN           reduce using rule 61 (varcte -> CINT .)
+    LTHAN           reduce using rule 61 (varcte -> CINT .)
+    MTHANE          reduce using rule 61 (varcte -> CINT .)
+    LTHANE          reduce using rule 61 (varcte -> CINT .)
+    NOTEQUAL        reduce using rule 61 (varcte -> CINT .)
+    EQUALTO         reduce using rule 61 (varcte -> CINT .)
+    SEMICOL         reduce using rule 61 (varcte -> CINT .)
+    CPAR            reduce using rule 61 (varcte -> CINT .)
+
+
+state 62
+
+    (59) varcte -> ID . OBRAC arrdim
+    (60) varcte -> ID .
+
+    OBRAC           shift and go to state 91
+    DIVIDE          reduce using rule 60 (varcte -> ID .)
+    PLUS            reduce using rule 60 (varcte -> ID .)
+    MINUS           reduce using rule 60 (varcte -> ID .)
+    TIMES           reduce using rule 60 (varcte -> ID .)
+    CBRAC           reduce using rule 60 (varcte -> ID .)
+    MTHAN           reduce using rule 60 (varcte -> ID .)
+    LTHAN           reduce using rule 60 (varcte -> ID .)
+    MTHANE          reduce using rule 60 (varcte -> ID .)
+    LTHANE          reduce using rule 60 (varcte -> ID .)
+    NOTEQUAL        reduce using rule 60 (varcte -> ID .)
+    EQUALTO         reduce using rule 60 (varcte -> ID .)
+    SEMICOL         reduce using rule 60 (varcte -> ID .)
+    CPAR            reduce using rule 60 (varcte -> ID .)
+
+
+state 63
+
+    (62) varcte -> CFLOAT .
+
+    DIVIDE          reduce using rule 62 (varcte -> CFLOAT .)
+    PLUS            reduce using rule 62 (varcte -> CFLOAT .)
+    MINUS           reduce using rule 62 (varcte -> CFLOAT .)
+    TIMES           reduce using rule 62 (varcte -> CFLOAT .)
+    CBRAC           reduce using rule 62 (varcte -> CFLOAT .)
+    MTHAN           reduce using rule 62 (varcte -> CFLOAT .)
+    LTHAN           reduce using rule 62 (varcte -> CFLOAT .)
+    MTHANE          reduce using rule 62 (varcte -> CFLOAT .)
+    LTHANE          reduce using rule 62 (varcte -> CFLOAT .)
+    NOTEQUAL        reduce using rule 62 (varcte -> CFLOAT .)
+    EQUALTO         reduce using rule 62 (varcte -> CFLOAT .)
+    SEMICOL         reduce using rule 62 (varcte -> CFLOAT .)
+    CPAR            reduce using rule 62 (varcte -> CFLOAT .)
+
+
+state 64
+
+    (33) assarr -> ID OBRAC arrdim . EQUAL asshelp
+
+    EQUAL           shift and go to state 92
+
+
+state 65
+
+    (32) assvar -> ID EQUAL asshelp .
+
+    CBRAK           reduce using rule 32 (assvar -> ID EQUAL asshelp .)
+    OBRAK           reduce using rule 32 (assvar -> ID EQUAL asshelp .)
+    ID              reduce using rule 32 (assvar -> ID EQUAL asshelp .)
+    VAR             reduce using rule 32 (assvar -> ID EQUAL asshelp .)
+    ARR             reduce using rule 32 (assvar -> ID EQUAL asshelp .)
+    IF              reduce using rule 32 (assvar -> ID EQUAL asshelp .)
+    PRINT           reduce using rule 32 (assvar -> ID EQUAL asshelp .)
+    WHILE           reduce using rule 32 (assvar -> ID EQUAL asshelp .)
+    DO              reduce using rule 32 (assvar -> ID EQUAL asshelp .)
+    RETURN          reduce using rule 32 (assvar -> ID EQUAL asshelp .)
+    FUNCTION        reduce using rule 32 (assvar -> ID EQUAL asshelp .)
+    MAIN            reduce using rule 32 (assvar -> ID EQUAL asshelp .)
+
+
+state 66
+
+    (35) asshelp -> CCHAR . SEMICOL
+
+    SEMICOL         shift and go to state 93
+
+
+state 67
+
+    (36) asshelp -> CSTRING . SEMICOL
+
+    SEMICOL         shift and go to state 94
+
+
+state 68
+
+    (34) asshelp -> association . SEMICOL
+
+    SEMICOL         shift and go to state 95
+
+
+state 69
+
+    (66) association -> exp . MTHAN exp
+    (67) association -> exp . LTHAN exp
+    (68) association -> exp . MTHANE exp
+    (69) association -> exp . LTHANE exp
+    (70) association -> exp . NOTEQUAL exp
+    (71) association -> exp . EQUALTO exp
+    (72) association -> exp .
+
+    MTHAN           shift and go to state 101
+    LTHAN           shift and go to state 99
+    MTHANE          shift and go to state 97
+    LTHANE          shift and go to state 100
+    NOTEQUAL        shift and go to state 96
+    EQUALTO         shift and go to state 98
+    SEMICOL         reduce using rule 72 (association -> exp .)
+    CPAR            reduce using rule 72 (association -> exp .)
+
+
+state 70
+
+    (65) decarr -> ARR type ID . OBRAC arrdim SEMICOL
+
+    OBRAC           shift and go to state 102
+
+
+state 71
+
+    (50) cycle -> DO block . WHILE OPAR association CPAR SEMICOL
+
+    WHILE           shift and go to state 103
+
+
+state 72
+
+    (19) return -> RETURN association . SEMICOL
+
+    SEMICOL         shift and go to state 104
+
+
+state 73
+
+    (46) writing -> PRINT OPAR . exp CPAR SEMICOL
+    (47) writing -> PRINT OPAR . CSTRING CPAR SEMICOL
+    (48) writing -> PRINT OPAR . CCHAR CPAR SEMICOL
+    (51) exp -> . term PLUS exp
+    (52) exp -> . term MINUS exp
+    (53) exp -> . term
+    (54) term -> . term TIMES factor
+    (55) term -> . factor DIVIDE factor
+    (56) term -> . factor
+    (57) factor -> . OPAR exp CPAR
+    (58) factor -> . varcte
+    (59) varcte -> . ID OBRAC arrdim
+    (60) varcte -> . ID
+    (61) varcte -> . CINT
+    (62) varcte -> . CFLOAT
+
+    CSTRING         shift and go to state 105
+    CCHAR           shift and go to state 107
+    OPAR            shift and go to state 60
+    ID              shift and go to state 62
+    CINT            shift and go to state 61
+    CFLOAT          shift and go to state 63
+
+    term                           shift and go to state 57
+    varcte                         shift and go to state 56
+    exp                            shift and go to state 106
+    factor                         shift and go to state 59
+
+state 74
+
+    (20) block -> OBRAK estatuto . CBRAK
+    (21) block -> OBRAK estatuto . block
+    (20) block -> . OBRAK estatuto CBRAK
+    (21) block -> . OBRAK estatuto block
+    (22) block -> . estatuto block
+    (23) block -> . estatuto CBRAK
+    (24) estatuto -> . assvar
+    (25) estatuto -> . assarr
+    (26) estatuto -> . decvar
+    (27) estatuto -> . decarr
+    (28) estatuto -> . condition
+    (29) estatuto -> . writing
+    (30) estatuto -> . cycle
+    (31) estatuto -> . return
+    (32) assvar -> . ID EQUAL asshelp
+    (33) assarr -> . ID OBRAC arrdim EQUAL asshelp
+    (40) decvar -> . VAR type ID SEMICOL
+    (65) decarr -> . ARR type ID OBRAC arrdim SEMICOL
+    (37) condition -> . IF OPAR association CPAR block else
+    (46) writing -> . PRINT OPAR exp CPAR SEMICOL
+    (47) writing -> . PRINT OPAR CSTRING CPAR SEMICOL
+    (48) writing -> . PRINT OPAR CCHAR CPAR SEMICOL
+    (49) cycle -> . WHILE OPAR association CPAR block
+    (50) cycle -> . DO block WHILE OPAR association CPAR SEMICOL
+    (19) return -> . RETURN association SEMICOL
+
+    CBRAK           shift and go to state 108
+    OBRAK           shift and go to state 39
+    ID              shift and go to state 13
+    VAR             shift and go to state 10
+    ARR             shift and go to state 15
+    IF              shift and go to state 43
+    PRINT           shift and go to state 38
+    WHILE           shift and go to state 49
+    DO              shift and go to state 35
+    RETURN          shift and go to state 36
+
+    assvar                         shift and go to state 48
+    return                         shift and go to state 44
+    decvar                         shift and go to state 37
+    assarr                         shift and go to state 40
+    estatuto                       shift and go to state 41
+    decarr                         shift and go to state 45
+    condition                      shift and go to state 46
+    writing                        shift and go to state 42
+    block                          shift and go to state 109
+    cycle                          shift and go to state 47
+
+state 75
+
+    (23) block -> estatuto CBRAK .
+
+    EXIT            reduce using rule 23 (block -> estatuto CBRAK .)
+    WHILE           reduce using rule 23 (block -> estatuto CBRAK .)
+    ELSE            reduce using rule 23 (block -> estatuto CBRAK .)
+    CBRAK           reduce using rule 23 (block -> estatuto CBRAK .)
+    OBRAK           reduce using rule 23 (block -> estatuto CBRAK .)
+    ID              reduce using rule 23 (block -> estatuto CBRAK .)
+    VAR             reduce using rule 23 (block -> estatuto CBRAK .)
+    ARR             reduce using rule 23 (block -> estatuto CBRAK .)
+    IF              reduce using rule 23 (block -> estatuto CBRAK .)
+    PRINT           reduce using rule 23 (block -> estatuto CBRAK .)
+    DO              reduce using rule 23 (block -> estatuto CBRAK .)
+    RETURN          reduce using rule 23 (block -> estatuto CBRAK .)
+    FUNCTION        reduce using rule 23 (block -> estatuto CBRAK .)
+    MAIN            reduce using rule 23 (block -> estatuto CBRAK .)
+
+
+state 76
+
+    (22) block -> estatuto block .
+
+    EXIT            reduce using rule 22 (block -> estatuto block .)
+    WHILE           reduce using rule 22 (block -> estatuto block .)
+    ELSE            reduce using rule 22 (block -> estatuto block .)
+    CBRAK           reduce using rule 22 (block -> estatuto block .)
+    OBRAK           reduce using rule 22 (block -> estatuto block .)
+    ID              reduce using rule 22 (block -> estatuto block .)
+    VAR             reduce using rule 22 (block -> estatuto block .)
+    ARR             reduce using rule 22 (block -> estatuto block .)
+    IF              reduce using rule 22 (block -> estatuto block .)
+    PRINT           reduce using rule 22 (block -> estatuto block .)
+    DO              reduce using rule 22 (block -> estatuto block .)
+    RETURN          reduce using rule 22 (block -> estatuto block .)
+    FUNCTION        reduce using rule 22 (block -> estatuto block .)
+    MAIN            reduce using rule 22 (block -> estatuto block .)
+
+
+state 77
+
+    (37) condition -> IF OPAR . association CPAR block else
+    (66) association -> . exp MTHAN exp
+    (67) association -> . exp LTHAN exp
+    (68) association -> . exp MTHANE exp
+    (69) association -> . exp LTHANE exp
+    (70) association -> . exp NOTEQUAL exp
+    (71) association -> . exp EQUALTO exp
+    (72) association -> . exp
+    (51) exp -> . term PLUS exp
+    (52) exp -> . term MINUS exp
+    (53) exp -> . term
+    (54) term -> . term TIMES factor
+    (55) term -> . factor DIVIDE factor
+    (56) term -> . factor
+    (57) factor -> . OPAR exp CPAR
+    (58) factor -> . varcte
+    (59) varcte -> . ID OBRAC arrdim
+    (60) varcte -> . ID
+    (61) varcte -> . CINT
+    (62) varcte -> . CFLOAT
+
+    OPAR            shift and go to state 60
+    ID              shift and go to state 62
+    CINT            shift and go to state 61
+    CFLOAT          shift and go to state 63
+
+    term                           shift and go to state 57
+    varcte                         shift and go to state 56
+    association                    shift and go to state 110
+    exp                            shift and go to state 69
+    factor                         shift and go to state 59
+
+state 78
+
+    (49) cycle -> WHILE OPAR . association CPAR block
+    (66) association -> . exp MTHAN exp
+    (67) association -> . exp LTHAN exp
+    (68) association -> . exp MTHANE exp
+    (69) association -> . exp LTHANE exp
+    (70) association -> . exp NOTEQUAL exp
+    (71) association -> . exp EQUALTO exp
+    (72) association -> . exp
+    (51) exp -> . term PLUS exp
+    (52) exp -> . term MINUS exp
+    (53) exp -> . term
+    (54) term -> . term TIMES factor
+    (55) term -> . factor DIVIDE factor
+    (56) term -> . factor
+    (57) factor -> . OPAR exp CPAR
+    (58) factor -> . varcte
+    (59) varcte -> . ID OBRAC arrdim
+    (60) varcte -> . ID
+    (61) varcte -> . CINT
+    (62) varcte -> . CFLOAT
+
+    OPAR            shift and go to state 60
+    ID              shift and go to state 62
+    CINT            shift and go to state 61
+    CFLOAT          shift and go to state 63
+
+    term                           shift and go to state 57
+    varcte                         shift and go to state 56
+    association                    shift and go to state 111
+    exp                            shift and go to state 69
+    factor                         shift and go to state 59
+
+state 79
+
+    (4) main -> PROGRAM ID SEMICOL MAIN block EXIT .
+
+    $end            reduce using rule 4 (main -> PROGRAM ID SEMICOL MAIN block EXIT .)
+
+
+state 80
+
+    (15) function -> FUNCTION ID type OPAR . type ID CPAR block
+    (16) function -> FUNCTION ID type OPAR . type ID COMA functionhelp
+    (41) type -> . INT
+    (42) type -> . FLOAT
+    (43) type -> . CHAR
+    (44) type -> . STRING
+    (45) type -> . BOOL
+
+    INT             shift and go to state 24
+    FLOAT           shift and go to state 22
+    CHAR            shift and go to state 25
+    STRING          shift and go to state 23
+    BOOL            shift and go to state 26
+
+    type                           shift and go to state 112
+
+state 81
+
+    (2) main -> PROGRAM ID SEMICOL decfunc MAIN block EXIT .
+
+    $end            reduce using rule 2 (main -> PROGRAM ID SEMICOL decfunc MAIN block EXIT .)
+
+
+state 82
+
+    (40) decvar -> VAR type ID SEMICOL .
+
+    CBRAK           reduce using rule 40 (decvar -> VAR type ID SEMICOL .)
+    OBRAK           reduce using rule 40 (decvar -> VAR type ID SEMICOL .)
+    ID              reduce using rule 40 (decvar -> VAR type ID SEMICOL .)
+    VAR             reduce using rule 40 (decvar -> VAR type ID SEMICOL .)
+    ARR             reduce using rule 40 (decvar -> VAR type ID SEMICOL .)
+    IF              reduce using rule 40 (decvar -> VAR type ID SEMICOL .)
+    PRINT           reduce using rule 40 (decvar -> VAR type ID SEMICOL .)
+    WHILE           reduce using rule 40 (decvar -> VAR type ID SEMICOL .)
+    DO              reduce using rule 40 (decvar -> VAR type ID SEMICOL .)
+    RETURN          reduce using rule 40 (decvar -> VAR type ID SEMICOL .)
+    MAIN            reduce using rule 40 (decvar -> VAR type ID SEMICOL .)
+    FUNCTION        reduce using rule 40 (decvar -> VAR type ID SEMICOL .)
+
+
+state 83
+
+    (3) main -> PROGRAM ID SEMICOL decglobal MAIN block EXIT .
+
+    $end            reduce using rule 3 (main -> PROGRAM ID SEMICOL decglobal MAIN block EXIT .)
+
+
+state 84
+
+    (1) main -> PROGRAM ID SEMICOL decglobal decfunc MAIN block . EXIT
+
+    EXIT            shift and go to state 113
+
+
+state 85
+
+    (54) term -> term TIMES . factor
+    (57) factor -> . OPAR exp CPAR
+    (58) factor -> . varcte
+    (59) varcte -> . ID OBRAC arrdim
+    (60) varcte -> . ID
+    (61) varcte -> . CINT
+    (62) varcte -> . CFLOAT
+
+    OPAR            shift and go to state 60
+    ID              shift and go to state 62
+    CINT            shift and go to state 61
+    CFLOAT          shift and go to state 63
+
+    varcte                         shift and go to state 56
+    factor                         shift and go to state 114
+
+state 86
+
+    (51) exp -> term PLUS . exp
+    (51) exp -> . term PLUS exp
+    (52) exp -> . term MINUS exp
+    (53) exp -> . term
+    (54) term -> . term TIMES factor
+    (55) term -> . factor DIVIDE factor
+    (56) term -> . factor
+    (57) factor -> . OPAR exp CPAR
+    (58) factor -> . varcte
+    (59) varcte -> . ID OBRAC arrdim
+    (60) varcte -> . ID
+    (61) varcte -> . CINT
+    (62) varcte -> . CFLOAT
+
+    OPAR            shift and go to state 60
+    ID              shift and go to state 62
+    CINT            shift and go to state 61
+    CFLOAT          shift and go to state 63
+
+    term                           shift and go to state 57
+    varcte                         shift and go to state 56
+    exp                            shift and go to state 115
+    factor                         shift and go to state 59
+
+state 87
+
+    (52) exp -> term MINUS . exp
+    (51) exp -> . term PLUS exp
+    (52) exp -> . term MINUS exp
+    (53) exp -> . term
+    (54) term -> . term TIMES factor
+    (55) term -> . factor DIVIDE factor
+    (56) term -> . factor
+    (57) factor -> . OPAR exp CPAR
+    (58) factor -> . varcte
+    (59) varcte -> . ID OBRAC arrdim
+    (60) varcte -> . ID
+    (61) varcte -> . CINT
+    (62) varcte -> . CFLOAT
+
+    OPAR            shift and go to state 60
+    ID              shift and go to state 62
+    CINT            shift and go to state 61
+    CFLOAT          shift and go to state 63
+
+    term                           shift and go to state 57
+    varcte                         shift and go to state 56
+    exp                            shift and go to state 116
+    factor                         shift and go to state 59
+
+state 88
+
+    (63) arrdim -> exp CBRAC . OBRAC arrdim
+    (64) arrdim -> exp CBRAC .
+
+    OBRAC           shift and go to state 117
+    EQUAL           reduce using rule 64 (arrdim -> exp CBRAC .)
+    DIVIDE          reduce using rule 64 (arrdim -> exp CBRAC .)
+    PLUS            reduce using rule 64 (arrdim -> exp CBRAC .)
+    MINUS           reduce using rule 64 (arrdim -> exp CBRAC .)
+    TIMES           reduce using rule 64 (arrdim -> exp CBRAC .)
+    CBRAC           reduce using rule 64 (arrdim -> exp CBRAC .)
+    MTHAN           reduce using rule 64 (arrdim -> exp CBRAC .)
+    LTHAN           reduce using rule 64 (arrdim -> exp CBRAC .)
+    MTHANE          reduce using rule 64 (arrdim -> exp CBRAC .)
+    LTHANE          reduce using rule 64 (arrdim -> exp CBRAC .)
+    NOTEQUAL        reduce using rule 64 (arrdim -> exp CBRAC .)
+    EQUALTO         reduce using rule 64 (arrdim -> exp CBRAC .)
+    SEMICOL         reduce using rule 64 (arrdim -> exp CBRAC .)
+    CPAR            reduce using rule 64 (arrdim -> exp CBRAC .)
+
+
+state 89
+
+    (55) term -> factor DIVIDE . factor
+    (57) factor -> . OPAR exp CPAR
+    (58) factor -> . varcte
+    (59) varcte -> . ID OBRAC arrdim
+    (60) varcte -> . ID
+    (61) varcte -> . CINT
+    (62) varcte -> . CFLOAT
+
+    OPAR            shift and go to state 60
+    ID              shift and go to state 62
+    CINT            shift and go to state 61
+    CFLOAT          shift and go to state 63
+
+    varcte                         shift and go to state 56
+    factor                         shift and go to state 118
+
+state 90
+
+    (57) factor -> OPAR exp . CPAR
+
+    CPAR            shift and go to state 119
+
+
+state 91
+
+    (59) varcte -> ID OBRAC . arrdim
+    (63) arrdim -> . exp CBRAC OBRAC arrdim
+    (64) arrdim -> . exp CBRAC
+    (51) exp -> . term PLUS exp
+    (52) exp -> . term MINUS exp
+    (53) exp -> . term
+    (54) term -> . term TIMES factor
+    (55) term -> . factor DIVIDE factor
+    (56) term -> . factor
+    (57) factor -> . OPAR exp CPAR
+    (58) factor -> . varcte
+    (59) varcte -> . ID OBRAC arrdim
+    (60) varcte -> . ID
+    (61) varcte -> . CINT
+    (62) varcte -> . CFLOAT
+
+    OPAR            shift and go to state 60
+    ID              shift and go to state 62
+    CINT            shift and go to state 61
+    CFLOAT          shift and go to state 63
+
+    term                           shift and go to state 57
+    factor                         shift and go to state 59
+    varcte                         shift and go to state 56
+    exp                            shift and go to state 58
+    arrdim                         shift and go to state 120
+
+state 92
+
+    (33) assarr -> ID OBRAC arrdim EQUAL . asshelp
+    (34) asshelp -> . association SEMICOL
+    (35) asshelp -> . CCHAR SEMICOL
+    (36) asshelp -> . CSTRING SEMICOL
+    (66) association -> . exp MTHAN exp
+    (67) association -> . exp LTHAN exp
+    (68) association -> . exp MTHANE exp
+    (69) association -> . exp LTHANE exp
+    (70) association -> . exp NOTEQUAL exp
+    (71) association -> . exp EQUALTO exp
+    (72) association -> . exp
+    (51) exp -> . term PLUS exp
+    (52) exp -> . term MINUS exp
+    (53) exp -> . term
+    (54) term -> . term TIMES factor
+    (55) term -> . factor DIVIDE factor
+    (56) term -> . factor
+    (57) factor -> . OPAR exp CPAR
+    (58) factor -> . varcte
+    (59) varcte -> . ID OBRAC arrdim
+    (60) varcte -> . ID
+    (61) varcte -> . CINT
+    (62) varcte -> . CFLOAT
+
+    CCHAR           shift and go to state 66
+    CSTRING         shift and go to state 67
+    OPAR            shift and go to state 60
+    ID              shift and go to state 62
+    CINT            shift and go to state 61
+    CFLOAT          shift and go to state 63
+
+    term                           shift and go to state 57
+    varcte                         shift and go to state 56
+    asshelp                        shift and go to state 121
+    exp                            shift and go to state 69
+    factor                         shift and go to state 59
+    association                    shift and go to state 68
+
+state 93
+
+    (35) asshelp -> CCHAR SEMICOL .
+
+    ID              reduce using rule 35 (asshelp -> CCHAR SEMICOL .)
+    FUNCTION        reduce using rule 35 (asshelp -> CCHAR SEMICOL .)
+    MAIN            reduce using rule 35 (asshelp -> CCHAR SEMICOL .)
+    CBRAK           reduce using rule 35 (asshelp -> CCHAR SEMICOL .)
+    OBRAK           reduce using rule 35 (asshelp -> CCHAR SEMICOL .)
+    VAR             reduce using rule 35 (asshelp -> CCHAR SEMICOL .)
+    ARR             reduce using rule 35 (asshelp -> CCHAR SEMICOL .)
+    IF              reduce using rule 35 (asshelp -> CCHAR SEMICOL .)
+    PRINT           reduce using rule 35 (asshelp -> CCHAR SEMICOL .)
+    WHILE           reduce using rule 35 (asshelp -> CCHAR SEMICOL .)
+    DO              reduce using rule 35 (asshelp -> CCHAR SEMICOL .)
+    RETURN          reduce using rule 35 (asshelp -> CCHAR SEMICOL .)
+
+
+state 94
+
+    (36) asshelp -> CSTRING SEMICOL .
+
+    ID              reduce using rule 36 (asshelp -> CSTRING SEMICOL .)
+    FUNCTION        reduce using rule 36 (asshelp -> CSTRING SEMICOL .)
+    MAIN            reduce using rule 36 (asshelp -> CSTRING SEMICOL .)
+    CBRAK           reduce using rule 36 (asshelp -> CSTRING SEMICOL .)
+    OBRAK           reduce using rule 36 (asshelp -> CSTRING SEMICOL .)
+    VAR             reduce using rule 36 (asshelp -> CSTRING SEMICOL .)
+    ARR             reduce using rule 36 (asshelp -> CSTRING SEMICOL .)
+    IF              reduce using rule 36 (asshelp -> CSTRING SEMICOL .)
+    PRINT           reduce using rule 36 (asshelp -> CSTRING SEMICOL .)
+    WHILE           reduce using rule 36 (asshelp -> CSTRING SEMICOL .)
+    DO              reduce using rule 36 (asshelp -> CSTRING SEMICOL .)
+    RETURN          reduce using rule 36 (asshelp -> CSTRING SEMICOL .)
+
+
+state 95
+
+    (34) asshelp -> association SEMICOL .
+
+    ID              reduce using rule 34 (asshelp -> association SEMICOL .)
+    FUNCTION        reduce using rule 34 (asshelp -> association SEMICOL .)
+    MAIN            reduce using rule 34 (asshelp -> association SEMICOL .)
+    CBRAK           reduce using rule 34 (asshelp -> association SEMICOL .)
+    OBRAK           reduce using rule 34 (asshelp -> association SEMICOL .)
+    VAR             reduce using rule 34 (asshelp -> association SEMICOL .)
+    ARR             reduce using rule 34 (asshelp -> association SEMICOL .)
+    IF              reduce using rule 34 (asshelp -> association SEMICOL .)
+    PRINT           reduce using rule 34 (asshelp -> association SEMICOL .)
+    WHILE           reduce using rule 34 (asshelp -> association SEMICOL .)
+    DO              reduce using rule 34 (asshelp -> association SEMICOL .)
+    RETURN          reduce using rule 34 (asshelp -> association SEMICOL .)
+
+
+state 96
+
+    (70) association -> exp NOTEQUAL . exp
+    (51) exp -> . term PLUS exp
+    (52) exp -> . term MINUS exp
+    (53) exp -> . term
+    (54) term -> . term TIMES factor
+    (55) term -> . factor DIVIDE factor
+    (56) term -> . factor
+    (57) factor -> . OPAR exp CPAR
+    (58) factor -> . varcte
+    (59) varcte -> . ID OBRAC arrdim
+    (60) varcte -> . ID
+    (61) varcte -> . CINT
+    (62) varcte -> . CFLOAT
+
+    OPAR            shift and go to state 60
+    ID              shift and go to state 62
+    CINT            shift and go to state 61
+    CFLOAT          shift and go to state 63
+
+    term                           shift and go to state 57
+    varcte                         shift and go to state 56
+    exp                            shift and go to state 122
+    factor                         shift and go to state 59
+
+state 97
+
+    (68) association -> exp MTHANE . exp
+    (51) exp -> . term PLUS exp
+    (52) exp -> . term MINUS exp
+    (53) exp -> . term
+    (54) term -> . term TIMES factor
+    (55) term -> . factor DIVIDE factor
+    (56) term -> . factor
+    (57) factor -> . OPAR exp CPAR
+    (58) factor -> . varcte
+    (59) varcte -> . ID OBRAC arrdim
+    (60) varcte -> . ID
+    (61) varcte -> . CINT
+    (62) varcte -> . CFLOAT
+
+    OPAR            shift and go to state 60
+    ID              shift and go to state 62
+    CINT            shift and go to state 61
+    CFLOAT          shift and go to state 63
+
+    term                           shift and go to state 57
+    varcte                         shift and go to state 56
+    exp                            shift and go to state 123
+    factor                         shift and go to state 59
+
+state 98
+
+    (71) association -> exp EQUALTO . exp
+    (51) exp -> . term PLUS exp
+    (52) exp -> . term MINUS exp
+    (53) exp -> . term
+    (54) term -> . term TIMES factor
+    (55) term -> . factor DIVIDE factor
+    (56) term -> . factor
+    (57) factor -> . OPAR exp CPAR
+    (58) factor -> . varcte
+    (59) varcte -> . ID OBRAC arrdim
+    (60) varcte -> . ID
+    (61) varcte -> . CINT
+    (62) varcte -> . CFLOAT
+
+    OPAR            shift and go to state 60
+    ID              shift and go to state 62
+    CINT            shift and go to state 61
+    CFLOAT          shift and go to state 63
+
+    term                           shift and go to state 57
+    varcte                         shift and go to state 56
+    exp                            shift and go to state 124
+    factor                         shift and go to state 59
+
+state 99
+
+    (67) association -> exp LTHAN . exp
+    (51) exp -> . term PLUS exp
+    (52) exp -> . term MINUS exp
+    (53) exp -> . term
+    (54) term -> . term TIMES factor
+    (55) term -> . factor DIVIDE factor
+    (56) term -> . factor
+    (57) factor -> . OPAR exp CPAR
+    (58) factor -> . varcte
+    (59) varcte -> . ID OBRAC arrdim
+    (60) varcte -> . ID
+    (61) varcte -> . CINT
+    (62) varcte -> . CFLOAT
+
+    OPAR            shift and go to state 60
+    ID              shift and go to state 62
+    CINT            shift and go to state 61
+    CFLOAT          shift and go to state 63
+
+    term                           shift and go to state 57
+    varcte                         shift and go to state 56
+    exp                            shift and go to state 125
+    factor                         shift and go to state 59
+
+state 100
+
+    (69) association -> exp LTHANE . exp
+    (51) exp -> . term PLUS exp
+    (52) exp -> . term MINUS exp
+    (53) exp -> . term
+    (54) term -> . term TIMES factor
+    (55) term -> . factor DIVIDE factor
+    (56) term -> . factor
+    (57) factor -> . OPAR exp CPAR
+    (58) factor -> . varcte
+    (59) varcte -> . ID OBRAC arrdim
+    (60) varcte -> . ID
+    (61) varcte -> . CINT
+    (62) varcte -> . CFLOAT
+
+    OPAR            shift and go to state 60
+    ID              shift and go to state 62
+    CINT            shift and go to state 61
+    CFLOAT          shift and go to state 63
+
+    term                           shift and go to state 57
+    varcte                         shift and go to state 56
+    exp                            shift and go to state 126
+    factor                         shift and go to state 59
+
+state 101
+
+    (66) association -> exp MTHAN . exp
+    (51) exp -> . term PLUS exp
+    (52) exp -> . term MINUS exp
+    (53) exp -> . term
+    (54) term -> . term TIMES factor
+    (55) term -> . factor DIVIDE factor
+    (56) term -> . factor
+    (57) factor -> . OPAR exp CPAR
+    (58) factor -> . varcte
+    (59) varcte -> . ID OBRAC arrdim
+    (60) varcte -> . ID
+    (61) varcte -> . CINT
+    (62) varcte -> . CFLOAT
+
+    OPAR            shift and go to state 60
+    ID              shift and go to state 62
+    CINT            shift and go to state 61
+    CFLOAT          shift and go to state 63
+
+    term                           shift and go to state 57
+    varcte                         shift and go to state 56
+    exp                            shift and go to state 127
+    factor                         shift and go to state 59
+
+state 102
+
+    (65) decarr -> ARR type ID OBRAC . arrdim SEMICOL
+    (63) arrdim -> . exp CBRAC OBRAC arrdim
+    (64) arrdim -> . exp CBRAC
+    (51) exp -> . term PLUS exp
+    (52) exp -> . term MINUS exp
+    (53) exp -> . term
+    (54) term -> . term TIMES factor
+    (55) term -> . factor DIVIDE factor
+    (56) term -> . factor
+    (57) factor -> . OPAR exp CPAR
+    (58) factor -> . varcte
+    (59) varcte -> . ID OBRAC arrdim
+    (60) varcte -> . ID
+    (61) varcte -> . CINT
+    (62) varcte -> . CFLOAT
+
+    OPAR            shift and go to state 60
+    ID              shift and go to state 62
+    CINT            shift and go to state 61
+    CFLOAT          shift and go to state 63
+
+    term                           shift and go to state 57
+    varcte                         shift and go to state 56
+    exp                            shift and go to state 58
+    factor                         shift and go to state 59
+    arrdim                         shift and go to state 128
+
+state 103
+
+    (50) cycle -> DO block WHILE . OPAR association CPAR SEMICOL
+
+    OPAR            shift and go to state 129
+
+
+state 104
+
+    (19) return -> RETURN association SEMICOL .
+
+    CBRAK           reduce using rule 19 (return -> RETURN association SEMICOL .)
+    OBRAK           reduce using rule 19 (return -> RETURN association SEMICOL .)
+    ID              reduce using rule 19 (return -> RETURN association SEMICOL .)
+    VAR             reduce using rule 19 (return -> RETURN association SEMICOL .)
+    ARR             reduce using rule 19 (return -> RETURN association SEMICOL .)
+    IF              reduce using rule 19 (return -> RETURN association SEMICOL .)
+    PRINT           reduce using rule 19 (return -> RETURN association SEMICOL .)
+    WHILE           reduce using rule 19 (return -> RETURN association SEMICOL .)
+    DO              reduce using rule 19 (return -> RETURN association SEMICOL .)
+    RETURN          reduce using rule 19 (return -> RETURN association SEMICOL .)
+
+
+state 105
+
+    (47) writing -> PRINT OPAR CSTRING . CPAR SEMICOL
+
+    CPAR            shift and go to state 130
+
+
+state 106
+
+    (46) writing -> PRINT OPAR exp . CPAR SEMICOL
+
+    CPAR            shift and go to state 131
+
+
+state 107
+
+    (48) writing -> PRINT OPAR CCHAR . CPAR SEMICOL
+
+    CPAR            shift and go to state 132
+
+
+state 108
+
+    (20) block -> OBRAK estatuto CBRAK .
+
+    EXIT            reduce using rule 20 (block -> OBRAK estatuto CBRAK .)
+    WHILE           reduce using rule 20 (block -> OBRAK estatuto CBRAK .)
+    ELSE            reduce using rule 20 (block -> OBRAK estatuto CBRAK .)
+    CBRAK           reduce using rule 20 (block -> OBRAK estatuto CBRAK .)
+    OBRAK           reduce using rule 20 (block -> OBRAK estatuto CBRAK .)
+    ID              reduce using rule 20 (block -> OBRAK estatuto CBRAK .)
+    VAR             reduce using rule 20 (block -> OBRAK estatuto CBRAK .)
+    ARR             reduce using rule 20 (block -> OBRAK estatuto CBRAK .)
+    IF              reduce using rule 20 (block -> OBRAK estatuto CBRAK .)
+    PRINT           reduce using rule 20 (block -> OBRAK estatuto CBRAK .)
+    DO              reduce using rule 20 (block -> OBRAK estatuto CBRAK .)
+    RETURN          reduce using rule 20 (block -> OBRAK estatuto CBRAK .)
+    FUNCTION        reduce using rule 20 (block -> OBRAK estatuto CBRAK .)
+    MAIN            reduce using rule 20 (block -> OBRAK estatuto CBRAK .)
+
+
+state 109
+
+    (21) block -> OBRAK estatuto block .
+
+    EXIT            reduce using rule 21 (block -> OBRAK estatuto block .)
+    WHILE           reduce using rule 21 (block -> OBRAK estatuto block .)
+    ELSE            reduce using rule 21 (block -> OBRAK estatuto block .)
+    CBRAK           reduce using rule 21 (block -> OBRAK estatuto block .)
+    OBRAK           reduce using rule 21 (block -> OBRAK estatuto block .)
+    ID              reduce using rule 21 (block -> OBRAK estatuto block .)
+    VAR             reduce using rule 21 (block -> OBRAK estatuto block .)
+    ARR             reduce using rule 21 (block -> OBRAK estatuto block .)
+    IF              reduce using rule 21 (block -> OBRAK estatuto block .)
+    PRINT           reduce using rule 21 (block -> OBRAK estatuto block .)
+    DO              reduce using rule 21 (block -> OBRAK estatuto block .)
+    RETURN          reduce using rule 21 (block -> OBRAK estatuto block .)
+    FUNCTION        reduce using rule 21 (block -> OBRAK estatuto block .)
+    MAIN            reduce using rule 21 (block -> OBRAK estatuto block .)
+
+
+state 110
+
+    (37) condition -> IF OPAR association . CPAR block else
+
+    CPAR            shift and go to state 133
+
+
+state 111
+
+    (49) cycle -> WHILE OPAR association . CPAR block
+
+    CPAR            shift and go to state 134
+
+
+state 112
+
+    (15) function -> FUNCTION ID type OPAR type . ID CPAR block
+    (16) function -> FUNCTION ID type OPAR type . ID COMA functionhelp
+
+    ID              shift and go to state 135
+
+
+state 113
+
+    (1) main -> PROGRAM ID SEMICOL decglobal decfunc MAIN block EXIT .
+
+    $end            reduce using rule 1 (main -> PROGRAM ID SEMICOL decglobal decfunc MAIN block EXIT .)
+
+
+state 114
+
+    (54) term -> term TIMES factor .
+
+    PLUS            reduce using rule 54 (term -> term TIMES factor .)
+    MINUS           reduce using rule 54 (term -> term TIMES factor .)
+    TIMES           reduce using rule 54 (term -> term TIMES factor .)
+    CPAR            reduce using rule 54 (term -> term TIMES factor .)
+    SEMICOL         reduce using rule 54 (term -> term TIMES factor .)
+    MTHAN           reduce using rule 54 (term -> term TIMES factor .)
+    LTHAN           reduce using rule 54 (term -> term TIMES factor .)
+    MTHANE          reduce using rule 54 (term -> term TIMES factor .)
+    LTHANE          reduce using rule 54 (term -> term TIMES factor .)
+    NOTEQUAL        reduce using rule 54 (term -> term TIMES factor .)
+    EQUALTO         reduce using rule 54 (term -> term TIMES factor .)
+    CBRAC           reduce using rule 54 (term -> term TIMES factor .)
+
+
+state 115
+
+    (51) exp -> term PLUS exp .
+
+    MTHAN           reduce using rule 51 (exp -> term PLUS exp .)
+    LTHAN           reduce using rule 51 (exp -> term PLUS exp .)
+    MTHANE          reduce using rule 51 (exp -> term PLUS exp .)
+    LTHANE          reduce using rule 51 (exp -> term PLUS exp .)
+    NOTEQUAL        reduce using rule 51 (exp -> term PLUS exp .)
+    EQUALTO         reduce using rule 51 (exp -> term PLUS exp .)
+    CPAR            reduce using rule 51 (exp -> term PLUS exp .)
+    SEMICOL         reduce using rule 51 (exp -> term PLUS exp .)
+    CBRAC           reduce using rule 51 (exp -> term PLUS exp .)
+
+
+state 116
+
+    (52) exp -> term MINUS exp .
+
+    MTHAN           reduce using rule 52 (exp -> term MINUS exp .)
+    LTHAN           reduce using rule 52 (exp -> term MINUS exp .)
+    MTHANE          reduce using rule 52 (exp -> term MINUS exp .)
+    LTHANE          reduce using rule 52 (exp -> term MINUS exp .)
+    NOTEQUAL        reduce using rule 52 (exp -> term MINUS exp .)
+    EQUALTO         reduce using rule 52 (exp -> term MINUS exp .)
+    CPAR            reduce using rule 52 (exp -> term MINUS exp .)
+    SEMICOL         reduce using rule 52 (exp -> term MINUS exp .)
+    CBRAC           reduce using rule 52 (exp -> term MINUS exp .)
+
+
+state 117
+
+    (63) arrdim -> exp CBRAC OBRAC . arrdim
+    (63) arrdim -> . exp CBRAC OBRAC arrdim
+    (64) arrdim -> . exp CBRAC
+    (51) exp -> . term PLUS exp
+    (52) exp -> . term MINUS exp
+    (53) exp -> . term
+    (54) term -> . term TIMES factor
+    (55) term -> . factor DIVIDE factor
+    (56) term -> . factor
+    (57) factor -> . OPAR exp CPAR
+    (58) factor -> . varcte
+    (59) varcte -> . ID OBRAC arrdim
+    (60) varcte -> . ID
+    (61) varcte -> . CINT
+    (62) varcte -> . CFLOAT
+
+    OPAR            shift and go to state 60
+    ID              shift and go to state 62
+    CINT            shift and go to state 61
+    CFLOAT          shift and go to state 63
+
+    term                           shift and go to state 57
+    factor                         shift and go to state 59
+    varcte                         shift and go to state 56
+    exp                            shift and go to state 58
+    arrdim                         shift and go to state 136
+
+state 118
+
+    (55) term -> factor DIVIDE factor .
+
+    PLUS            reduce using rule 55 (term -> factor DIVIDE factor .)
+    MINUS           reduce using rule 55 (term -> factor DIVIDE factor .)
+    TIMES           reduce using rule 55 (term -> factor DIVIDE factor .)
+    CPAR            reduce using rule 55 (term -> factor DIVIDE factor .)
+    SEMICOL         reduce using rule 55 (term -> factor DIVIDE factor .)
+    MTHAN           reduce using rule 55 (term -> factor DIVIDE factor .)
+    LTHAN           reduce using rule 55 (term -> factor DIVIDE factor .)
+    MTHANE          reduce using rule 55 (term -> factor DIVIDE factor .)
+    LTHANE          reduce using rule 55 (term -> factor DIVIDE factor .)
+    NOTEQUAL        reduce using rule 55 (term -> factor DIVIDE factor .)
+    EQUALTO         reduce using rule 55 (term -> factor DIVIDE factor .)
+    CBRAC           reduce using rule 55 (term -> factor DIVIDE factor .)
+
+
+state 119
+
+    (57) factor -> OPAR exp CPAR .
+
+    DIVIDE          reduce using rule 57 (factor -> OPAR exp CPAR .)
+    PLUS            reduce using rule 57 (factor -> OPAR exp CPAR .)
+    MINUS           reduce using rule 57 (factor -> OPAR exp CPAR .)
+    TIMES           reduce using rule 57 (factor -> OPAR exp CPAR .)
+    CBRAC           reduce using rule 57 (factor -> OPAR exp CPAR .)
+    MTHAN           reduce using rule 57 (factor -> OPAR exp CPAR .)
+    LTHAN           reduce using rule 57 (factor -> OPAR exp CPAR .)
+    MTHANE          reduce using rule 57 (factor -> OPAR exp CPAR .)
+    LTHANE          reduce using rule 57 (factor -> OPAR exp CPAR .)
+    NOTEQUAL        reduce using rule 57 (factor -> OPAR exp CPAR .)
+    EQUALTO         reduce using rule 57 (factor -> OPAR exp CPAR .)
+    CPAR            reduce using rule 57 (factor -> OPAR exp CPAR .)
+    SEMICOL         reduce using rule 57 (factor -> OPAR exp CPAR .)
+
+
+state 120
+
+    (59) varcte -> ID OBRAC arrdim .
+
+    DIVIDE          reduce using rule 59 (varcte -> ID OBRAC arrdim .)
+    PLUS            reduce using rule 59 (varcte -> ID OBRAC arrdim .)
+    MINUS           reduce using rule 59 (varcte -> ID OBRAC arrdim .)
+    TIMES           reduce using rule 59 (varcte -> ID OBRAC arrdim .)
+    CBRAC           reduce using rule 59 (varcte -> ID OBRAC arrdim .)
+    MTHAN           reduce using rule 59 (varcte -> ID OBRAC arrdim .)
+    LTHAN           reduce using rule 59 (varcte -> ID OBRAC arrdim .)
+    MTHANE          reduce using rule 59 (varcte -> ID OBRAC arrdim .)
+    LTHANE          reduce using rule 59 (varcte -> ID OBRAC arrdim .)
+    NOTEQUAL        reduce using rule 59 (varcte -> ID OBRAC arrdim .)
+    EQUALTO         reduce using rule 59 (varcte -> ID OBRAC arrdim .)
+    SEMICOL         reduce using rule 59 (varcte -> ID OBRAC arrdim .)
+    CPAR            reduce using rule 59 (varcte -> ID OBRAC arrdim .)
+
+
+state 121
+
+    (33) assarr -> ID OBRAC arrdim EQUAL asshelp .
+
+    CBRAK           reduce using rule 33 (assarr -> ID OBRAC arrdim EQUAL asshelp .)
+    OBRAK           reduce using rule 33 (assarr -> ID OBRAC arrdim EQUAL asshelp .)
+    ID              reduce using rule 33 (assarr -> ID OBRAC arrdim EQUAL asshelp .)
+    VAR             reduce using rule 33 (assarr -> ID OBRAC arrdim EQUAL asshelp .)
+    ARR             reduce using rule 33 (assarr -> ID OBRAC arrdim EQUAL asshelp .)
+    IF              reduce using rule 33 (assarr -> ID OBRAC arrdim EQUAL asshelp .)
+    PRINT           reduce using rule 33 (assarr -> ID OBRAC arrdim EQUAL asshelp .)
+    WHILE           reduce using rule 33 (assarr -> ID OBRAC arrdim EQUAL asshelp .)
+    DO              reduce using rule 33 (assarr -> ID OBRAC arrdim EQUAL asshelp .)
+    RETURN          reduce using rule 33 (assarr -> ID OBRAC arrdim EQUAL asshelp .)
+    FUNCTION        reduce using rule 33 (assarr -> ID OBRAC arrdim EQUAL asshelp .)
+    MAIN            reduce using rule 33 (assarr -> ID OBRAC arrdim EQUAL asshelp .)
+
+
+state 122
+
+    (70) association -> exp NOTEQUAL exp .
+
+    SEMICOL         reduce using rule 70 (association -> exp NOTEQUAL exp .)
+    CPAR            reduce using rule 70 (association -> exp NOTEQUAL exp .)
+
+
+state 123
+
+    (68) association -> exp MTHANE exp .
+
+    SEMICOL         reduce using rule 68 (association -> exp MTHANE exp .)
+    CPAR            reduce using rule 68 (association -> exp MTHANE exp .)
+
+
+state 124
+
+    (71) association -> exp EQUALTO exp .
+
+    SEMICOL         reduce using rule 71 (association -> exp EQUALTO exp .)
+    CPAR            reduce using rule 71 (association -> exp EQUALTO exp .)
+
+
+state 125
+
+    (67) association -> exp LTHAN exp .
+
+    SEMICOL         reduce using rule 67 (association -> exp LTHAN exp .)
+    CPAR            reduce using rule 67 (association -> exp LTHAN exp .)
+
+
+state 126
+
+    (69) association -> exp LTHANE exp .
+
+    SEMICOL         reduce using rule 69 (association -> exp LTHANE exp .)
+    CPAR            reduce using rule 69 (association -> exp LTHANE exp .)
+
+
+state 127
+
+    (66) association -> exp MTHAN exp .
+
+    SEMICOL         reduce using rule 66 (association -> exp MTHAN exp .)
+    CPAR            reduce using rule 66 (association -> exp MTHAN exp .)
+
+
+state 128
+
+    (65) decarr -> ARR type ID OBRAC arrdim . SEMICOL
+
+    SEMICOL         shift and go to state 137
+
+
+state 129
+
+    (50) cycle -> DO block WHILE OPAR . association CPAR SEMICOL
+    (66) association -> . exp MTHAN exp
+    (67) association -> . exp LTHAN exp
+    (68) association -> . exp MTHANE exp
+    (69) association -> . exp LTHANE exp
+    (70) association -> . exp NOTEQUAL exp
+    (71) association -> . exp EQUALTO exp
+    (72) association -> . exp
+    (51) exp -> . term PLUS exp
+    (52) exp -> . term MINUS exp
+    (53) exp -> . term
+    (54) term -> . term TIMES factor
+    (55) term -> . factor DIVIDE factor
+    (56) term -> . factor
+    (57) factor -> . OPAR exp CPAR
+    (58) factor -> . varcte
+    (59) varcte -> . ID OBRAC arrdim
+    (60) varcte -> . ID
+    (61) varcte -> . CINT
+    (62) varcte -> . CFLOAT
+
+    OPAR            shift and go to state 60
+    ID              shift and go to state 62
+    CINT            shift and go to state 61
+    CFLOAT          shift and go to state 63
+
+    term                           shift and go to state 57
+    varcte                         shift and go to state 56
+    exp                            shift and go to state 69
+    factor                         shift and go to state 59
+    association                    shift and go to state 138
+
+state 130
+
+    (47) writing -> PRINT OPAR CSTRING CPAR . SEMICOL
+
+    SEMICOL         shift and go to state 139
+
+
+state 131
+
+    (46) writing -> PRINT OPAR exp CPAR . SEMICOL
+
+    SEMICOL         shift and go to state 140
+
+
+state 132
+
+    (48) writing -> PRINT OPAR CCHAR CPAR . SEMICOL
+
+    SEMICOL         shift and go to state 141
+
+
+state 133
+
+    (37) condition -> IF OPAR association CPAR . block else
+    (20) block -> . OBRAK estatuto CBRAK
+    (21) block -> . OBRAK estatuto block
+    (22) block -> . estatuto block
+    (23) block -> . estatuto CBRAK
+    (24) estatuto -> . assvar
+    (25) estatuto -> . assarr
+    (26) estatuto -> . decvar
+    (27) estatuto -> . decarr
+    (28) estatuto -> . condition
+    (29) estatuto -> . writing
+    (30) estatuto -> . cycle
+    (31) estatuto -> . return
+    (32) assvar -> . ID EQUAL asshelp
+    (33) assarr -> . ID OBRAC arrdim EQUAL asshelp
+    (40) decvar -> . VAR type ID SEMICOL
+    (65) decarr -> . ARR type ID OBRAC arrdim SEMICOL
+    (37) condition -> . IF OPAR association CPAR block else
+    (46) writing -> . PRINT OPAR exp CPAR SEMICOL
+    (47) writing -> . PRINT OPAR CSTRING CPAR SEMICOL
+    (48) writing -> . PRINT OPAR CCHAR CPAR SEMICOL
+    (49) cycle -> . WHILE OPAR association CPAR block
+    (50) cycle -> . DO block WHILE OPAR association CPAR SEMICOL
+    (19) return -> . RETURN association SEMICOL
+
+    OBRAK           shift and go to state 39
+    ID              shift and go to state 13
+    VAR             shift and go to state 10
+    ARR             shift and go to state 15
+    IF              shift and go to state 43
+    PRINT           shift and go to state 38
+    WHILE           shift and go to state 49
+    DO              shift and go to state 35
+    RETURN          shift and go to state 36
+
+    assvar                         shift and go to state 48
+    return                         shift and go to state 44
+    decvar                         shift and go to state 37
+    assarr                         shift and go to state 40
+    estatuto                       shift and go to state 41
+    condition                      shift and go to state 46
+    writing                        shift and go to state 42
+    decarr                         shift and go to state 45
+    block                          shift and go to state 142
+    cycle                          shift and go to state 47
+
+state 134
+
+    (49) cycle -> WHILE OPAR association CPAR . block
+    (20) block -> . OBRAK estatuto CBRAK
+    (21) block -> . OBRAK estatuto block
+    (22) block -> . estatuto block
+    (23) block -> . estatuto CBRAK
+    (24) estatuto -> . assvar
+    (25) estatuto -> . assarr
+    (26) estatuto -> . decvar
+    (27) estatuto -> . decarr
+    (28) estatuto -> . condition
+    (29) estatuto -> . writing
+    (30) estatuto -> . cycle
+    (31) estatuto -> . return
+    (32) assvar -> . ID EQUAL asshelp
+    (33) assarr -> . ID OBRAC arrdim EQUAL asshelp
+    (40) decvar -> . VAR type ID SEMICOL
+    (65) decarr -> . ARR type ID OBRAC arrdim SEMICOL
+    (37) condition -> . IF OPAR association CPAR block else
+    (46) writing -> . PRINT OPAR exp CPAR SEMICOL
+    (47) writing -> . PRINT OPAR CSTRING CPAR SEMICOL
+    (48) writing -> . PRINT OPAR CCHAR CPAR SEMICOL
+    (49) cycle -> . WHILE OPAR association CPAR block
+    (50) cycle -> . DO block WHILE OPAR association CPAR SEMICOL
+    (19) return -> . RETURN association SEMICOL
+
+    OBRAK           shift and go to state 39
+    ID              shift and go to state 13
+    VAR             shift and go to state 10
+    ARR             shift and go to state 15
+    IF              shift and go to state 43
+    PRINT           shift and go to state 38
+    WHILE           shift and go to state 49
+    DO              shift and go to state 35
+    RETURN          shift and go to state 36
+
+    assvar                         shift and go to state 48
+    return                         shift and go to state 44
+    decvar                         shift and go to state 37
+    assarr                         shift and go to state 40
+    estatuto                       shift and go to state 41
+    condition                      shift and go to state 46
+    decarr                         shift and go to state 45
+    writing                        shift and go to state 42
+    block                          shift and go to state 143
+    cycle                          shift and go to state 47
+
+state 135
+
+    (15) function -> FUNCTION ID type OPAR type ID . CPAR block
+    (16) function -> FUNCTION ID type OPAR type ID . COMA functionhelp
+
+    CPAR            shift and go to state 144
+    COMA            shift and go to state 145
+
+
+state 136
+
+    (63) arrdim -> exp CBRAC OBRAC arrdim .
+
+    EQUAL           reduce using rule 63 (arrdim -> exp CBRAC OBRAC arrdim .)
+    DIVIDE          reduce using rule 63 (arrdim -> exp CBRAC OBRAC arrdim .)
+    PLUS            reduce using rule 63 (arrdim -> exp CBRAC OBRAC arrdim .)
+    MINUS           reduce using rule 63 (arrdim -> exp CBRAC OBRAC arrdim .)
+    TIMES           reduce using rule 63 (arrdim -> exp CBRAC OBRAC arrdim .)
+    CBRAC           reduce using rule 63 (arrdim -> exp CBRAC OBRAC arrdim .)
+    MTHAN           reduce using rule 63 (arrdim -> exp CBRAC OBRAC arrdim .)
+    LTHAN           reduce using rule 63 (arrdim -> exp CBRAC OBRAC arrdim .)
+    MTHANE          reduce using rule 63 (arrdim -> exp CBRAC OBRAC arrdim .)
+    LTHANE          reduce using rule 63 (arrdim -> exp CBRAC OBRAC arrdim .)
+    NOTEQUAL        reduce using rule 63 (arrdim -> exp CBRAC OBRAC arrdim .)
+    EQUALTO         reduce using rule 63 (arrdim -> exp CBRAC OBRAC arrdim .)
+    SEMICOL         reduce using rule 63 (arrdim -> exp CBRAC OBRAC arrdim .)
+    CPAR            reduce using rule 63 (arrdim -> exp CBRAC OBRAC arrdim .)
+
+
+state 137
+
+    (65) decarr -> ARR type ID OBRAC arrdim SEMICOL .
+
+    CBRAK           reduce using rule 65 (decarr -> ARR type ID OBRAC arrdim SEMICOL .)
+    OBRAK           reduce using rule 65 (decarr -> ARR type ID OBRAC arrdim SEMICOL .)
+    ID              reduce using rule 65 (decarr -> ARR type ID OBRAC arrdim SEMICOL .)
+    VAR             reduce using rule 65 (decarr -> ARR type ID OBRAC arrdim SEMICOL .)
+    ARR             reduce using rule 65 (decarr -> ARR type ID OBRAC arrdim SEMICOL .)
+    IF              reduce using rule 65 (decarr -> ARR type ID OBRAC arrdim SEMICOL .)
+    PRINT           reduce using rule 65 (decarr -> ARR type ID OBRAC arrdim SEMICOL .)
+    WHILE           reduce using rule 65 (decarr -> ARR type ID OBRAC arrdim SEMICOL .)
+    DO              reduce using rule 65 (decarr -> ARR type ID OBRAC arrdim SEMICOL .)
+    RETURN          reduce using rule 65 (decarr -> ARR type ID OBRAC arrdim SEMICOL .)
+    MAIN            reduce using rule 65 (decarr -> ARR type ID OBRAC arrdim SEMICOL .)
+    FUNCTION        reduce using rule 65 (decarr -> ARR type ID OBRAC arrdim SEMICOL .)
+
+
+state 138
+
+    (50) cycle -> DO block WHILE OPAR association . CPAR SEMICOL
+
+    CPAR            shift and go to state 146
+
+
+state 139
+
+    (47) writing -> PRINT OPAR CSTRING CPAR SEMICOL .
+
+    CBRAK           reduce using rule 47 (writing -> PRINT OPAR CSTRING CPAR SEMICOL .)
+    OBRAK           reduce using rule 47 (writing -> PRINT OPAR CSTRING CPAR SEMICOL .)
+    ID              reduce using rule 47 (writing -> PRINT OPAR CSTRING CPAR SEMICOL .)
+    VAR             reduce using rule 47 (writing -> PRINT OPAR CSTRING CPAR SEMICOL .)
+    ARR             reduce using rule 47 (writing -> PRINT OPAR CSTRING CPAR SEMICOL .)
+    IF              reduce using rule 47 (writing -> PRINT OPAR CSTRING CPAR SEMICOL .)
+    PRINT           reduce using rule 47 (writing -> PRINT OPAR CSTRING CPAR SEMICOL .)
+    WHILE           reduce using rule 47 (writing -> PRINT OPAR CSTRING CPAR SEMICOL .)
+    DO              reduce using rule 47 (writing -> PRINT OPAR CSTRING CPAR SEMICOL .)
+    RETURN          reduce using rule 47 (writing -> PRINT OPAR CSTRING CPAR SEMICOL .)
+
+
+state 140
+
+    (46) writing -> PRINT OPAR exp CPAR SEMICOL .
+
+    CBRAK           reduce using rule 46 (writing -> PRINT OPAR exp CPAR SEMICOL .)
+    OBRAK           reduce using rule 46 (writing -> PRINT OPAR exp CPAR SEMICOL .)
+    ID              reduce using rule 46 (writing -> PRINT OPAR exp CPAR SEMICOL .)
+    VAR             reduce using rule 46 (writing -> PRINT OPAR exp CPAR SEMICOL .)
+    ARR             reduce using rule 46 (writing -> PRINT OPAR exp CPAR SEMICOL .)
+    IF              reduce using rule 46 (writing -> PRINT OPAR exp CPAR SEMICOL .)
+    PRINT           reduce using rule 46 (writing -> PRINT OPAR exp CPAR SEMICOL .)
+    WHILE           reduce using rule 46 (writing -> PRINT OPAR exp CPAR SEMICOL .)
+    DO              reduce using rule 46 (writing -> PRINT OPAR exp CPAR SEMICOL .)
+    RETURN          reduce using rule 46 (writing -> PRINT OPAR exp CPAR SEMICOL .)
+
+
+state 141
+
+    (48) writing -> PRINT OPAR CCHAR CPAR SEMICOL .
+
+    CBRAK           reduce using rule 48 (writing -> PRINT OPAR CCHAR CPAR SEMICOL .)
+    OBRAK           reduce using rule 48 (writing -> PRINT OPAR CCHAR CPAR SEMICOL .)
+    ID              reduce using rule 48 (writing -> PRINT OPAR CCHAR CPAR SEMICOL .)
+    VAR             reduce using rule 48 (writing -> PRINT OPAR CCHAR CPAR SEMICOL .)
+    ARR             reduce using rule 48 (writing -> PRINT OPAR CCHAR CPAR SEMICOL .)
+    IF              reduce using rule 48 (writing -> PRINT OPAR CCHAR CPAR SEMICOL .)
+    PRINT           reduce using rule 48 (writing -> PRINT OPAR CCHAR CPAR SEMICOL .)
+    WHILE           reduce using rule 48 (writing -> PRINT OPAR CCHAR CPAR SEMICOL .)
+    DO              reduce using rule 48 (writing -> PRINT OPAR CCHAR CPAR SEMICOL .)
+    RETURN          reduce using rule 48 (writing -> PRINT OPAR CCHAR CPAR SEMICOL .)
+
+
+state 142
+
+    (37) condition -> IF OPAR association CPAR block . else
+    (38) else -> . ELSE block
+    (39) else -> .
+
+    ELSE            shift and go to state 148
+    CBRAK           reduce using rule 39 (else -> .)
+    OBRAK           reduce using rule 39 (else -> .)
+    ID              reduce using rule 39 (else -> .)
+    VAR             reduce using rule 39 (else -> .)
+    ARR             reduce using rule 39 (else -> .)
+    IF              reduce using rule 39 (else -> .)
+    PRINT           reduce using rule 39 (else -> .)
+    WHILE           reduce using rule 39 (else -> .)
+    DO              reduce using rule 39 (else -> .)
+    RETURN          reduce using rule 39 (else -> .)
+
+    else                           shift and go to state 147
+
+state 143
+
+    (49) cycle -> WHILE OPAR association CPAR block .
+
+    CBRAK           reduce using rule 49 (cycle -> WHILE OPAR association CPAR block .)
+    OBRAK           reduce using rule 49 (cycle -> WHILE OPAR association CPAR block .)
+    ID              reduce using rule 49 (cycle -> WHILE OPAR association CPAR block .)
+    VAR             reduce using rule 49 (cycle -> WHILE OPAR association CPAR block .)
+    ARR             reduce using rule 49 (cycle -> WHILE OPAR association CPAR block .)
+    IF              reduce using rule 49 (cycle -> WHILE OPAR association CPAR block .)
+    PRINT           reduce using rule 49 (cycle -> WHILE OPAR association CPAR block .)
+    WHILE           reduce using rule 49 (cycle -> WHILE OPAR association CPAR block .)
+    DO              reduce using rule 49 (cycle -> WHILE OPAR association CPAR block .)
+    RETURN          reduce using rule 49 (cycle -> WHILE OPAR association CPAR block .)
+
+
+state 144
+
+    (15) function -> FUNCTION ID type OPAR type ID CPAR . block
+    (20) block -> . OBRAK estatuto CBRAK
+    (21) block -> . OBRAK estatuto block
+    (22) block -> . estatuto block
+    (23) block -> . estatuto CBRAK
+    (24) estatuto -> . assvar
+    (25) estatuto -> . assarr
+    (26) estatuto -> . decvar
+    (27) estatuto -> . decarr
+    (28) estatuto -> . condition
+    (29) estatuto -> . writing
+    (30) estatuto -> . cycle
+    (31) estatuto -> . return
+    (32) assvar -> . ID EQUAL asshelp
+    (33) assarr -> . ID OBRAC arrdim EQUAL asshelp
+    (40) decvar -> . VAR type ID SEMICOL
+    (65) decarr -> . ARR type ID OBRAC arrdim SEMICOL
+    (37) condition -> . IF OPAR association CPAR block else
+    (46) writing -> . PRINT OPAR exp CPAR SEMICOL
+    (47) writing -> . PRINT OPAR CSTRING CPAR SEMICOL
+    (48) writing -> . PRINT OPAR CCHAR CPAR SEMICOL
+    (49) cycle -> . WHILE OPAR association CPAR block
+    (50) cycle -> . DO block WHILE OPAR association CPAR SEMICOL
+    (19) return -> . RETURN association SEMICOL
+
+    OBRAK           shift and go to state 39
+    ID              shift and go to state 13
+    VAR             shift and go to state 10
+    ARR             shift and go to state 15
+    IF              shift and go to state 43
+    PRINT           shift and go to state 38
+    WHILE           shift and go to state 49
+    DO              shift and go to state 35
+    RETURN          shift and go to state 36
+
+    assvar                         shift and go to state 48
+    return                         shift and go to state 44
+    decvar                         shift and go to state 37
+    assarr                         shift and go to state 40
+    estatuto                       shift and go to state 41
+    decarr                         shift and go to state 45
+    condition                      shift and go to state 46
+    writing                        shift and go to state 42
+    block                          shift and go to state 149
+    cycle                          shift and go to state 47
+
+state 145
+
+    (16) function -> FUNCTION ID type OPAR type ID COMA . functionhelp
+    (17) functionhelp -> . type ID COMA functionhelp
+    (18) functionhelp -> . type ID CPAR block
+    (41) type -> . INT
+    (42) type -> . FLOAT
+    (43) type -> . CHAR
+    (44) type -> . STRING
+    (45) type -> . BOOL
+
+    INT             shift and go to state 24
+    FLOAT           shift and go to state 22
+    CHAR            shift and go to state 25
+    STRING          shift and go to state 23
+    BOOL            shift and go to state 26
+
+    type                           shift and go to state 151
+    functionhelp                   shift and go to state 150
+
+state 146
+
+    (50) cycle -> DO block WHILE OPAR association CPAR . SEMICOL
+
+    SEMICOL         shift and go to state 152
+
+
+state 147
+
+    (37) condition -> IF OPAR association CPAR block else .
+
+    CBRAK           reduce using rule 37 (condition -> IF OPAR association CPAR block else .)
+    OBRAK           reduce using rule 37 (condition -> IF OPAR association CPAR block else .)
+    ID              reduce using rule 37 (condition -> IF OPAR association CPAR block else .)
+    VAR             reduce using rule 37 (condition -> IF OPAR association CPAR block else .)
+    ARR             reduce using rule 37 (condition -> IF OPAR association CPAR block else .)
+    IF              reduce using rule 37 (condition -> IF OPAR association CPAR block else .)
+    PRINT           reduce using rule 37 (condition -> IF OPAR association CPAR block else .)
+    WHILE           reduce using rule 37 (condition -> IF OPAR association CPAR block else .)
+    DO              reduce using rule 37 (condition -> IF OPAR association CPAR block else .)
+    RETURN          reduce using rule 37 (condition -> IF OPAR association CPAR block else .)
+
+
+state 148
+
+    (38) else -> ELSE . block
+    (20) block -> . OBRAK estatuto CBRAK
+    (21) block -> . OBRAK estatuto block
+    (22) block -> . estatuto block
+    (23) block -> . estatuto CBRAK
+    (24) estatuto -> . assvar
+    (25) estatuto -> . assarr
+    (26) estatuto -> . decvar
+    (27) estatuto -> . decarr
+    (28) estatuto -> . condition
+    (29) estatuto -> . writing
+    (30) estatuto -> . cycle
+    (31) estatuto -> . return
+    (32) assvar -> . ID EQUAL asshelp
+    (33) assarr -> . ID OBRAC arrdim EQUAL asshelp
+    (40) decvar -> . VAR type ID SEMICOL
+    (65) decarr -> . ARR type ID OBRAC arrdim SEMICOL
+    (37) condition -> . IF OPAR association CPAR block else
+    (46) writing -> . PRINT OPAR exp CPAR SEMICOL
+    (47) writing -> . PRINT OPAR CSTRING CPAR SEMICOL
+    (48) writing -> . PRINT OPAR CCHAR CPAR SEMICOL
+    (49) cycle -> . WHILE OPAR association CPAR block
+    (50) cycle -> . DO block WHILE OPAR association CPAR SEMICOL
+    (19) return -> . RETURN association SEMICOL
+
+    OBRAK           shift and go to state 39
+    ID              shift and go to state 13
+    VAR             shift and go to state 10
+    ARR             shift and go to state 15
+    IF              shift and go to state 43
+    PRINT           shift and go to state 38
+    WHILE           shift and go to state 49
+    DO              shift and go to state 35
+    RETURN          shift and go to state 36
+
+    assvar                         shift and go to state 48
+    return                         shift and go to state 44
+    decvar                         shift and go to state 37
+    assarr                         shift and go to state 40
+    estatuto                       shift and go to state 41
+    decarr                         shift and go to state 45
+    condition                      shift and go to state 46
+    writing                        shift and go to state 42
+    block                          shift and go to state 153
+    cycle                          shift and go to state 47
+
+state 149
+
+    (15) function -> FUNCTION ID type OPAR type ID CPAR block .
+
+    ID              reduce using rule 15 (function -> FUNCTION ID type OPAR type ID CPAR block .)
+    FUNCTION        reduce using rule 15 (function -> FUNCTION ID type OPAR type ID CPAR block .)
+    MAIN            reduce using rule 15 (function -> FUNCTION ID type OPAR type ID CPAR block .)
+
+
+state 150
+
+    (16) function -> FUNCTION ID type OPAR type ID COMA functionhelp .
+
+    ID              reduce using rule 16 (function -> FUNCTION ID type OPAR type ID COMA functionhelp .)
+    FUNCTION        reduce using rule 16 (function -> FUNCTION ID type OPAR type ID COMA functionhelp .)
+    MAIN            reduce using rule 16 (function -> FUNCTION ID type OPAR type ID COMA functionhelp .)
+
+
+state 151
+
+    (17) functionhelp -> type . ID COMA functionhelp
+    (18) functionhelp -> type . ID CPAR block
+
+    ID              shift and go to state 154
+
+
+state 152
+
+    (50) cycle -> DO block WHILE OPAR association CPAR SEMICOL .
+
+    CBRAK           reduce using rule 50 (cycle -> DO block WHILE OPAR association CPAR SEMICOL .)
+    OBRAK           reduce using rule 50 (cycle -> DO block WHILE OPAR association CPAR SEMICOL .)
+    ID              reduce using rule 50 (cycle -> DO block WHILE OPAR association CPAR SEMICOL .)
+    VAR             reduce using rule 50 (cycle -> DO block WHILE OPAR association CPAR SEMICOL .)
+    ARR             reduce using rule 50 (cycle -> DO block WHILE OPAR association CPAR SEMICOL .)
+    IF              reduce using rule 50 (cycle -> DO block WHILE OPAR association CPAR SEMICOL .)
+    PRINT           reduce using rule 50 (cycle -> DO block WHILE OPAR association CPAR SEMICOL .)
+    WHILE           reduce using rule 50 (cycle -> DO block WHILE OPAR association CPAR SEMICOL .)
+    DO              reduce using rule 50 (cycle -> DO block WHILE OPAR association CPAR SEMICOL .)
+    RETURN          reduce using rule 50 (cycle -> DO block WHILE OPAR association CPAR SEMICOL .)
+
+
+state 153
+
+    (38) else -> ELSE block .
+
+    CBRAK           reduce using rule 38 (else -> ELSE block .)
+    OBRAK           reduce using rule 38 (else -> ELSE block .)
+    ID              reduce using rule 38 (else -> ELSE block .)
+    VAR             reduce using rule 38 (else -> ELSE block .)
+    ARR             reduce using rule 38 (else -> ELSE block .)
+    IF              reduce using rule 38 (else -> ELSE block .)
+    PRINT           reduce using rule 38 (else -> ELSE block .)
+    WHILE           reduce using rule 38 (else -> ELSE block .)
+    DO              reduce using rule 38 (else -> ELSE block .)
+    RETURN          reduce using rule 38 (else -> ELSE block .)
+
+
+state 154
+
+    (17) functionhelp -> type ID . COMA functionhelp
+    (18) functionhelp -> type ID . CPAR block
+
+    COMA            shift and go to state 156
+    CPAR            shift and go to state 155
+
+
+state 155
+
+    (18) functionhelp -> type ID CPAR . block
+    (20) block -> . OBRAK estatuto CBRAK
+    (21) block -> . OBRAK estatuto block
+    (22) block -> . estatuto block
+    (23) block -> . estatuto CBRAK
+    (24) estatuto -> . assvar
+    (25) estatuto -> . assarr
+    (26) estatuto -> . decvar
+    (27) estatuto -> . decarr
+    (28) estatuto -> . condition
+    (29) estatuto -> . writing
+    (30) estatuto -> . cycle
+    (31) estatuto -> . return
+    (32) assvar -> . ID EQUAL asshelp
+    (33) assarr -> . ID OBRAC arrdim EQUAL asshelp
+    (40) decvar -> . VAR type ID SEMICOL
+    (65) decarr -> . ARR type ID OBRAC arrdim SEMICOL
+    (37) condition -> . IF OPAR association CPAR block else
+    (46) writing -> . PRINT OPAR exp CPAR SEMICOL
+    (47) writing -> . PRINT OPAR CSTRING CPAR SEMICOL
+    (48) writing -> . PRINT OPAR CCHAR CPAR SEMICOL
+    (49) cycle -> . WHILE OPAR association CPAR block
+    (50) cycle -> . DO block WHILE OPAR association CPAR SEMICOL
+    (19) return -> . RETURN association SEMICOL
+
+    OBRAK           shift and go to state 39
+    ID              shift and go to state 13
+    VAR             shift and go to state 10
+    ARR             shift and go to state 15
+    IF              shift and go to state 43
+    PRINT           shift and go to state 38
+    WHILE           shift and go to state 49
+    DO              shift and go to state 35
+    RETURN          shift and go to state 36
+
+    assvar                         shift and go to state 48
+    return                         shift and go to state 44
+    decvar                         shift and go to state 37
+    assarr                         shift and go to state 40
+    estatuto                       shift and go to state 41
+    decarr                         shift and go to state 45
+    condition                      shift and go to state 46
+    writing                        shift and go to state 42
+    block                          shift and go to state 157
+    cycle                          shift and go to state 47
+
+state 156
+
+    (17) functionhelp -> type ID COMA . functionhelp
+    (17) functionhelp -> . type ID COMA functionhelp
+    (18) functionhelp -> . type ID CPAR block
+    (41) type -> . INT
+    (42) type -> . FLOAT
+    (43) type -> . CHAR
+    (44) type -> . STRING
+    (45) type -> . BOOL
+
+    INT             shift and go to state 24
+    FLOAT           shift and go to state 22
+    CHAR            shift and go to state 25
+    STRING          shift and go to state 23
+    BOOL            shift and go to state 26
+
+    type                           shift and go to state 151
+    functionhelp                   shift and go to state 158
+
+state 157
+
+    (18) functionhelp -> type ID CPAR block .
+
+    ID              reduce using rule 18 (functionhelp -> type ID CPAR block .)
+    FUNCTION        reduce using rule 18 (functionhelp -> type ID CPAR block .)
+    MAIN            reduce using rule 18 (functionhelp -> type ID CPAR block .)
+
+
+state 158
+
+    (17) functionhelp -> type ID COMA functionhelp .
+
+    ID              reduce using rule 17 (functionhelp -> type ID COMA functionhelp .)
+    FUNCTION        reduce using rule 17 (functionhelp -> type ID COMA functionhelp .)
+    MAIN            reduce using rule 17 (functionhelp -> type ID COMA functionhelp .)
+
